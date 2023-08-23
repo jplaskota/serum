@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'TripSansRegular';
+    src: local('Trip Sans Regular'), local('Trip-Sans-Regular'),
+        url('TripSans-Regular.woff2') format('woff2'),
+        url('TripSans-Regular.woff') format('woff'),
+        url('TripSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
