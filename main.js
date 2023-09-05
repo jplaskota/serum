@@ -1,4 +1,4 @@
-new Macy({
+const macyInstance = new Macy({
   container: ".noteContainer",
   trueOrder: true,
   columns: 5,
@@ -13,3 +13,9 @@ new Macy({
     481: 1,
   },
 });
+
+window.onload = () => {
+  macyInstance.reInit();
+  console.log("loaded");
+};
+a
