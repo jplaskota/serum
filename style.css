@@ -70,8 +70,6 @@ nav {
 }
 
 main {
-    height: 100%;
-    width: 100%;
     display: flex;
     justify-content: center;
     padding-top: 1rem;
@@ -79,20 +77,11 @@ main {
 
 /* TODO .pinnedNoteContainer {...} */
 
-/* TODO masonry layout */
-
 .noteContainer {
-    height: fit-content;
-    width: fit-content;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    width: 80vw;
 }
 
 .note {
-    /* height: fit-content; */
     width: 200px;
     padding: 15px;
     display: flex;
@@ -100,14 +89,4 @@ main {
     gap: 5px;
     background-color: darkslategray;
     border-radius: 5px;
-}
-
-.noteTitle {
-    height: fit-content;
-    width: max-content;
-    font-size: 1.5em;
-}
-
-.noteText {
-    width: fit-content
 }
