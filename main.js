@@ -1,9 +1,11 @@
-const macyInstance = new Macy({
+// import Macy from "macy";
+
+const macyInstance = Macy({
   container: ".noteContainer",
   trueOrder: true,
   columns: 5,
   margin: {
-    x: 45,
+    x: 15,
     y: 15,
   },
   breakAt: {
@@ -18,4 +20,3 @@ window.onload = () => {
   macyInstance.reInit();
   console.log("loaded");
 };
-a

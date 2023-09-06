@@ -70,6 +70,7 @@ nav {
 }
 
 main {
+    width: 100vw;
     display: flex;
     justify-content: center;
     padding-top: 1rem;
@@ -81,12 +82,15 @@ main {
     width: 80vw;
 }
 
+.noteBox {
+    border-radius: 5px;
+    background-color: darkslategray;
+}
+
 .note {
-    width: 200px;
+    width: fit-content;
     padding: 15px;
     display: flex;
     flex-direction: column;
     gap: 5px;
-    background-color: darkslategray;
-    border-radius: 5px;
 }
