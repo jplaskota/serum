@@ -1,6 +1,9 @@
-const express = require("express");
+import express from "express";
+import { connectToDatabase } from "./db.service.js";
 
 const app = express();
+
+connectToDatabase();
 
 app.use(express.static("public"));
 
