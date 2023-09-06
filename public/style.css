@@ -1,5 +1,5 @@
-@import url("/fonts/TripSans-Regular/style.css");
-@import url("/fonts/TripSans-Ultra/style.css");
+@import url("assets/fonts/TripSans-Regular/style.css");
+@import url("assets/fonts/TripSans-Ultra/style.css");
 
 @media (prefers-color-scheme: dark) {
     body {
