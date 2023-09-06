@@ -1,0 +1,96 @@
+@import url("/fonts/TripSans-Regular/style.css");
+@import url("/fonts/TripSans-Ultra/style.css");
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: rgb(20, 17, 15);
+        color: rgb(225, 210, 190);
+    }
+
+    :root {
+        --theme: rgb(225, 210, 190);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background: rgb(240, 235, 225);
+        color: rgb(60, 60, 60);
+    }
+
+    :root {
+        --theme: rgb(60, 60, 60);
+    }
+}
+
+body {
+    margin: 0;
+    font-family: 'TripSansRegular';
+}
+
+.bold {
+    font-family: 'TripSansUltra';
+}
+
+nav {
+    height: min-content;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: 1.5em;
+    letter-spacing: 1px;
+}
+
+.menuContainer {
+    height: 100%;
+    aspect-ratio: 1/1;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: .5em;
+}
+
+.menuBtn {
+    transition: .2s;
+    width: 50%;
+    height: 50%;
+    background-color: var(--theme);
+    border: none;
+    border-radius: 50%;
+
+}
+
+.menuBtn:hover {
+    scale: 1.3;
+}
+
+main {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+/* TODO .pinnedNoteContainer {...} */
+
+.noteContainer {
+    width: 80vw;
+}
+
+.noteBox {
+    border-radius: 5px;
+    background-color: darkslategray;
+}
+
+.note {
+    width: fit-content;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
