@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 dotenv.config();
 
@@ -21,16 +21,37 @@ export async function connectToDatabase() {
   }
 }
 
+export async function findNote(_id) {
+  // todo
+}
+
 export async function addNote(newNote) {
-  const result = await collections.notes.insertOne(newNote);
-
-  console.log("Note added: ", result);
+  await collections.notes.insertOne(newNote, (err, result) => {
+    if (err) throw err;
+    console.log("Note added: ", result);
+  });
 }
 
-export async function updateNote(_id, newNote) {
-  // todo
+export async function updateNote(id, newNote) {
+  await collections.notes.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: newNote },
+    (err, result) => {
+      if (err) throw err;
+      console.log("Note edited: ", result);
+    }
+  );
 }
 
-export async function deleteNote(_id) {
-  // todo
+export async function deleteNote(id) {
+  await collections.notes.deleteOne({ _id: ObjectId(id) }, (err, result) => {
+    if (err) throw err;
+    if (result && result.deletedCount) {
+      console.log("Note deleted: ", result);
+    } else if (!result?.deletedCount) {
+      console.log("Can't find note with this id: ", result);
+    } else {
+      console.log("Note has not been removed: ", result);
+    }
+  });
 }
