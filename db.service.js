@@ -1,9 +1,10 @@
 import dotenv from "dotenv";
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
+import { nanoid } from "nanoid";
 
 dotenv.config();
 
-export const collections = {};
+const collections = {};
 
 export async function connectToDatabase() {
   const client = new MongoClient(process.env.DB_CONN_STRING);
@@ -15,7 +16,13 @@ export async function connectToDatabase() {
 
     collections.notes = db.collection("notes");
 
-    // deleteNote("64f90d76ed5732eb362adaa8");
+    // deleteNote("mwP8lkIKBpPMOVrzYavW6");
+
+    // Add();
+
+    // Edit("qPrha6VqAqOpnKClm0-Xu");
+
+    // console.log(getAllNote());
   } catch (err) {
     console.error("DB connection status: failed: ", err);
   } finally {
@@ -23,27 +30,80 @@ export async function connectToDatabase() {
   }
 }
 
-export async function findNote(_id) {
-  // todo
+// for test
+function Add() {
+  addNote({
+    _id: nanoid(),
+    title: "test 1",
+    text: "aaaaa",
+    date: Date.now(),
+  });
+}
+
+// for test
+function Edit(id) {
+  updateNote(id, {
+    title: "edited note",
+    text: "ajeee",
+  });
+}
+
+export async function getAllNote() {
+  try {
+    const result = await collections.notes.find({}).toArray();
+
+    if (result) {
+      console.log("Notes were downloaded: ", result);
+      return result;
+    } else {
+      console.log("Problem with downloading notes");
+    }
+  } catch (err) {
+    console.error("Problem with downloading notes", err);
+  }
+}
+
+export async function findByIdNote(id) {
+  try {
+    const result = await collections.notes.findOne({
+      _id: id,
+    });
+
+    if (result) {
+      console.log("Note found");
+      return result;
+    } else {
+      console.log("Can't find note with this id: ", id);
+    }
+  } catch (err) {
+    console.error("Problem with finding note: ", err);
+  }
 }
 
 export async function addNote(newNote) {
-  await collections.notes.insertOne(newNote, (err, result) => {
-    if (err) throw err;
-    console.log("Note added: ", result);
-  });
+  try {
+    const result = await collections.notes.insertOne(newNote);
+
+    if (result && result.insertedId) {
+      console.log("Note added: ", result.insertedId);
+    } else {
+      console.log("Note has not been added: ", result);
+    }
+  } catch (err) {
+    console.error("Problem with adding note: ", err);
+  }
 }
 
 export async function updateNote(id, newNote) {
   try {
     const result = await collections.notes.updateOne(
-      { _id: new ObjectId(id) },
+      { _id: id },
       { $set: newNote }
     );
 
-    if (result && result.updateCount) {
+    if (result && result.modifiedCount) {
       console.log("Note updated: ", result);
-    } else if (!result.updateCount) {
+    } else if (!result.modifiedCount) {
       console.log("Can't find note with this id: ", result);
     } else {
       console.log("Note has not been updated", result);
@@ -55,11 +115,11 @@ export async function updateNote(id, newNote) {
 
 export async function deleteNote(id) {
   try {
-    const result = await collections.notes.deleteOne({ _id: new ObjectId(id) });
+    const result = await collections.notes.deleteOne({ _id: id });
 
-    if (result && result.deleteCount) {
+    if (result && result.deletedCount) {
       console.log("Note deleted: ", result);
-    } else if (!result.deleteCount) {
+    } else if (!result.deletedCount) {
       console.log("Can't find note with this id: ", result);
     } else {
       console.log("Note has not been removed: ", result);
