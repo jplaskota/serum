@@ -1,37 +1,36 @@
 import dotenv from "dotenv";
-import * as MongoDB from "mongodb";
+import { MongoClient } from "mongodb";
 
 dotenv.config();
 
-export let notes;
+const collections = {};
 
 export async function connectToDatabase() {
-  const client = new MongoDB.MongoClient(process.env.DB_CONN_STRING);
+  const client = new MongoClient(process.env.DB_CONN_STRING);
 
   try {
     await client.connect();
 
     const db = client.db("SerumProject");
 
-    notes = await db.collection("notes").find({}).toArray();
-
-    // await addNote(client, {
-    //   title: "db test 2",
-    //   text: "bbb",
-    //   date: Date.now(),
-    // });
+    collections.notes = db.collection("notes");
   } catch (e) {
-    console.error(e);
+    console.error("DB connection status: failed: ", e);
   } finally {
-    await client.close();
+    console.log("DB connection status: success");
   }
 }
 
-async function addNote(client, newNote) {
-  const result = await client
-    .db("SerumProject")
-    .collection("notes")
-    .insertOne(newNote);
+export async function addNote(newNote) {
+  const result = await collections.notes.insertOne(newNote);
 
-  console.log("Note added");
+  console.log("Note added: ", result);
+}
+
+export async function updateNote(_id, newNote) {
+  // todo
+}
+
+export async function deleteNote(_id) {
+  // todo
 }
