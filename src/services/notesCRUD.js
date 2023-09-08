@@ -1,68 +1,5 @@
 import { nanoid } from "nanoid";
-import { collections } from "../src/db.service.js";
-
-const noteContainer = document.querySelector("[data-noteContainer]");
-
-// const notes = getAllNote();
-// console.log(notes);
-
-const macyInstance = Macy({
-  container: noteContainer,
-  trueOrder: true,
-  columns: 5,
-  margin: {
-    x: 15,
-    y: 15,
-  },
-  breakAt: {
-    1201: 4,
-    1025: 3,
-    769: 2,
-    481: 1,
-  },
-});
-
-function Add() {
-  addNote({
-    _id: nanoid(),
-    title: "test 1",
-    text: "aaaaa",
-    date: Date.now(),
-  });
-}
-
-// // for test
-// function Edit(id) {
-//   updateNote(id, {
-//     title: "edited note",
-//     text: "test",
-//   });
-// }
-
-window.onload = () => {
-  macyInstance.reInit();
-  console.log("loaded");
-};
-
-function generateNote(xNote) {
-  const noteBox = document.createElement("div");
-  noteBox.className = "noteBox";
-  noteBox.tabIndex = 0;
-
-  const note = document.createElement("div");
-  note.className = "note";
-  noteBox.appendChild(note);
-
-  const title = document.createElement("div");
-  title.className = "noteTitle bold";
-  title.textContent = xNote.title;
-  note.appendChild(title);
-
-  const text = document.createElement("div");
-  text.className = "noteText";
-  text.textContent = xNote.text;
-  note.appendChild(text);
-}
+import { collections } from "./db.service.js";
 
 export async function getAllNote() {
   try {
@@ -96,7 +33,13 @@ export async function findByIdNote(id) {
 
 export async function addNote(newNote) {
   try {
-    const result = await collections.notes.insertOne(newNote);
+    const note = {
+      _id: nanoid(),
+      date: Date.now(),
+      ...newNote,
+    };
+
+    const result = await collections.notes.insertOne(note);
 
     if (result && result.insertedId) {
       console.log("Note added: ", result.insertedId);
