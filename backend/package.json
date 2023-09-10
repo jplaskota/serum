@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "keywords": [
+    "backend"
+  ],
+  "author": "jplaskota",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
+    "nanoid": "^4.0.2",
+    "nodemon": "^3.0.1"
+  }
+}

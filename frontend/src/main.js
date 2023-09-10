@@ -1,23 +1,14 @@
-import { connectToDatabase } from "./src/services/db.js";
+import Macy from "macy";
 import "./style.css";
-
-connectToDatabase().catch((e) => {
-  console.error(e);
-});
 
 const noteContainer = document.querySelector("[data-noteContainer]");
 
-// const notes = getAllNote();
-// console.log(notes);
-
-const macyInstance = Macy({
+/// layout to notes container using macy package
+const macyInstance = new Macy({
   container: noteContainer,
   trueOrder: true,
   columns: 5,
-  margin: {
-    x: 15,
-    y: 15,
-  },
+  margin: 15,
   breakAt: {
     1201: 4,
     1025: 3,
@@ -26,21 +17,7 @@ const macyInstance = Macy({
   },
 });
 
-// function Add() {
-//   addNote({
-//     title: "test 1",
-//     text: "aaaaa",
-//   });
-// }
-
-// // for test
-// function Edit(id) {
-//   updateNote(id, {
-//     title: "edited note",
-//     text: "test",
-//   });
-// }
-
+/// macy must recalculate when page is fully loaded
 window.onload = () => {
   macyInstance.reInit();
   console.log("loaded");

@@ -12,8 +12,6 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "macy": "^2.5.1",
-    "mongoose": "^7.5.0",
-    "nanoid": "^4.0.2"
+    "macy": "^2.5.1"
   }
 }
