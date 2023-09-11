@@ -112,8 +112,3 @@ describe("Notes API", () => {
     });
   });
 });
-
-// Close the Chai HTTP request object after all tests are completed
-after(() => {
-  notes.close();
-});
