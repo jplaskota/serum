@@ -1,11 +1,8 @@
 import dotenv from "dotenv";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 dotenv.config();
 
-// export const collections = {};
-
-// dotenv config ...
 const MONGODB_URI = process.env.DB_CONN_STRING;
 
 export default async function connectToDatabase() {

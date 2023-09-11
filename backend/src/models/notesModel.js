@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { nanoid } from "nanoid";
 
+// TODO title and content "required" test
+
 const schema = new mongoose.Schema(
   {
     _id: {
@@ -9,11 +11,11 @@ const schema = new mongoose.Schema(
     },
     title: {
       type: String,
-      required: true,
+      required: false,
     },
-    text: {
+    content: {
       type: String,
-      required: true,
+      required: false,
     },
     date: {
       type: Date,
