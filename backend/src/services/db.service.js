@@ -19,6 +19,7 @@ export default async function connectToDatabase() {
     });
     db.on("error", (err) => {
       console.error("MongoDB connection error:", err);
+      throw err;
     });
     db.on("disconnected", () => {
       console.log("MongoDB disconnected");
@@ -28,15 +29,6 @@ export default async function connectToDatabase() {
     });
   } catch (err) {
     console.error("MongoDB connection failed: ", err);
-    throw err;
-  }
-}
-
-export async function connectionClose() {
-  try {
-    await mongoose.connection.close();
-  } catch (err) {
-    console.error("Connection close: ", err);
     throw err;
   }
 }

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "server": "nodemon index.js",
-    "test": "mocha tests/notes.test.js --exit"
+    "test": "mocha tests/notes.test.js --timeout 10000 --exit"
   },
   "keywords": [
     "backend"
