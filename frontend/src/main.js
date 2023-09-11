@@ -3,7 +3,7 @@ import "./style.css";
 
 const noteContainer = document.querySelector("[data-noteContainer]");
 
-/// layout to notes container using macy package
+/// Layout to notes container using macy package
 const macyInstance = new Macy({
   container: noteContainer,
   trueOrder: true,
@@ -17,7 +17,7 @@ const macyInstance = new Macy({
   },
 });
 
-/// macy must recalculate when page is fully loaded
+/// Macy must recalculate when page is fully loaded
 window.onload = () => {
   macyInstance.reInit();
   console.log("loaded");

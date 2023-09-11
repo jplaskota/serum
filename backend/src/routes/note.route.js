@@ -1,5 +1,5 @@
 import express from "express";
-import Note from "../models/notesModel.js";
+import Note from "../models/note.model.js";
 
 const router = express.Router();
 export default router;
