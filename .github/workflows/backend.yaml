@@ -22,6 +22,14 @@ jobs:
         run: npm install
         working-directory: backend
 
+      - name: Set up .env file
+        run: |
+          echo "DB_CONN_STRING=${{ secrets.DB_CONN_STRING }}" > backend/.env
+          echo "SERVER_PORT=${{ secrets.SERVER_PORT }}" >> backend/.env
+        env:
+          DB_CONN_STRING: ${{ secrets.DB_CONN_STRING }}
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+
       - name: Run unit tests
         run: npm test
         working-directory: backend
