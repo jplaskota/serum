@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
-import notes from "./src/routes/noteRoutes.js";
+import notes from "./src/routes/notes.route.js";
 import connectToDatabase from "./src/services/db.service.js";
 
 dotenv.config();
@@ -22,3 +22,5 @@ connectToDatabase()
     console.error(err);
     process.exit();
   });
+
+export default app; //for tests

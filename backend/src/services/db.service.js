@@ -31,3 +31,12 @@ export default async function connectToDatabase() {
     throw err;
   }
 }
+
+export async function connectionClose() {
+  try {
+    await mongoose.connection.close();
+  } catch (err) {
+    console.error("Connection close: ", err);
+    throw err;
+  }
+}

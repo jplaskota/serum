@@ -1,5 +1,5 @@
 import express from "express";
-import Note from "../models/note.model.js";
+import Note from "../models/notes.model.js";
 
 const router = express.Router();
 export default router;
@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
     const { title, content } = req.body;
 
     if (!title && !content) {
-      return res.status(400).send("Title ore content are required");
+      return res.status(400).send("Title or content are required");
     }
 
     const newNote = new Note({

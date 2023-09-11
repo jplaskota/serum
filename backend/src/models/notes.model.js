@@ -7,7 +7,7 @@ const schema = new mongoose.Schema(
   {
     _id: {
       type: String,
-      default: nanoid(),
+      default: () => nanoid(),
     },
     title: {
       type: String,
