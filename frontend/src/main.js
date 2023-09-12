@@ -23,7 +23,7 @@ window.onload = () => {
   console.log("loaded");
 };
 
-function generateNote(xNote) {
+function generateNote(_data) {
   const noteBox = document.createElement("div");
   noteBox.className = "noteBox";
   noteBox.tabIndex = 0;
@@ -34,11 +34,11 @@ function generateNote(xNote) {
 
   const title = document.createElement("div");
   title.className = "noteTitle bold";
-  title.textContent = xNote.title;
+  title.textContent = _data.title;
   note.appendChild(title);
 
-  const text = document.createElement("div");
-  text.className = "noteText";
-  text.textContent = xNote.text;
-  note.appendChild(text);
+  const content = document.createElement("div");
+  content.className = "noteText";
+  content.textContent = _data.content;
+  note.appendChild(content);
 }

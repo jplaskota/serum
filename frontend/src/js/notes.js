@@ -89,3 +89,4 @@ export function deleteNote(_id) {
 }
 
 // TODO alert function from main.js to display error / notification
+// TODO auth token
