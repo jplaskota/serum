@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import notes from "./src/routes/notes.route.js";
@@ -7,6 +8,9 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Enable CORS for all routes
+app.use(cors());
 
 const port = process.env.SERVER_PORT || 3000;
 

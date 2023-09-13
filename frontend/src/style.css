@@ -9,6 +9,7 @@
 
   :root {
     --theme: rgb(225, 210, 190);
+    --bgc: rgb(20, 17, 15);
   }
 }
 
@@ -20,6 +21,7 @@
 
   :root {
     --theme: rgb(60, 60, 60);
+    --bgc: rgb(240, 235, 225);
   }
 }
 
@@ -32,6 +34,14 @@ body {
   font-family: 'TripSansUltra';
 }
 
+.blur {
+  filter: blur(5px);
+}
+
+.container {
+  transition: .3s ease-in-out;
+}
+
 nav {
   height: min-content;
   position: relative;
@@ -40,12 +50,14 @@ nav {
   align-items: center;
 }
 
-.title {
+nav .title {
   font-size: 1.5em;
   letter-spacing: 1px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.menuContainer {
+nav .menu-container {
   height: 100%;
   aspect-ratio: 1/1;
   position: absolute;
@@ -55,18 +67,17 @@ nav {
   right: .5em;
 }
 
-.menuBtn {
+nav .menu-btn {
   transition: .2s;
   width: 50%;
   height: 50%;
   background-color: var(--theme);
   border: none;
   border-radius: 50%;
-
 }
 
-.menuBtn:hover {
-  scale: 1.3;
+nav .menu-btn:hover {
+  transform: scale(1.3);
 }
 
 main {
@@ -78,19 +89,125 @@ main {
 
 /* TODO .pinnedNoteContainer {...} */
 
-.noteContainer {
+main .note-container {
   width: 80vw;
 }
 
-.noteBox {
+main .note-box {
   border-radius: 5px;
-  background-color: darkslategray;
+  background-color: var(--theme);
+  transition: .2s ease-in-out;
 }
 
-.note {
+main .note-box:hover {
+  transform: scale(1.05);
+  z-index: 1;
+  cursor: default;
+}
+
+main .note {
   width: fit-content;
   padding: 15px;
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+main .title {
+  font-size: 1.7rem;
+  color: var(--bgc);
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+main .content {
+  font-size: 1.4rem;
+  color: var(--bgc);
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+header .popup-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: .7s ease-in-out;
+  transition-delay: .15s;
+}
+
+header .visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+header .popup-box {
+  min-width: 200px;
+  width: fit-content;
+  height: fit-content;
+  background-color: var(--theme);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+header .input {
+  outline: none;
+  border: none;
+  background: none;
+  color: var(--bgc);
+}
+
+header .input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+header .new-title {
+  font-size: 2.5rem;
+  outline-width: 0;
+  border: none;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+header .new-content {
+  font-size: 2rem;
+  outline-width: 0;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+footer {
+  width: 100vw;
+  height: 0;
+  display: flex;
+  justify-content: right;
+}
+
+footer .add-btn {
+  position: fixed;
+  width: 70px;
+  bottom: -40px;
+  right: -40px;
+  height: 70px;
+  border: none;
+  border-radius: 40% 0 0 0;
+  background-color: var(--theme);
+  transition: .2s ease-out;
+}
+
+footer .add-btn:hover {
+  bottom: 0;
+  right: 0;
+  border-radius: 20px 0 0 0;
 }
