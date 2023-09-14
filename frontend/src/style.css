@@ -38,8 +38,17 @@ body {
   filter: blur(5px);
 }
 
-.container {
-  transition: .3s ease-in-out;
+.page-container {
+  position: fixed;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  transition: .6s ease-in-out;
+  left: 0vw;
+}
+
+.page-slide {
+  left: -100vw;
 }
 
 nav {
@@ -57,26 +66,26 @@ nav .title {
   -webkit-user-select: none;
 }
 
-nav .menu-container {
-  height: 100%;
-  aspect-ratio: 1/1;
-  position: absolute;
+.menu-container {
+  width: 100vw;
+  position: fixed;
+  z-index: 99;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  right: .5em;
+  justify-content: right;
 }
 
-nav .menu-btn {
-  transition: .2s;
-  width: 50%;
-  height: 50%;
+.menu-btn {
+  width: 1rem;
+  height: 1rem;
+  z-index: 1;
+  margin: 10px;
   background-color: var(--theme);
   border: none;
   border-radius: 50%;
+  transition: .2s ease-in-out;
 }
 
-nav .menu-btn:hover {
+.menu-btn:hover {
   transform: scale(1.3);
 }
 
@@ -129,26 +138,23 @@ main .content {
   -webkit-user-select: none;
 }
 
-header .popup-container {
-  position: absolute;
+header .form-container {
+  position: fixed;
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
-  visibility: hidden;
-  opacity: 0;
-  transition: .7s ease-in-out;
-  transition-delay: .15s;
+  transition: .6s ease-in-out;
+  left: 100vw;
+  background-color: var(--bgc);
 }
 
-header .visible {
-  visibility: visible;
-  opacity: 1;
+header .form-slide {
+  left: 0vw;
 }
 
-header .popup-box {
+header .form-box {
   min-width: 200px;
   width: fit-content;
   height: fit-content;
@@ -187,27 +193,33 @@ header .new-content {
   border-radius: 5px;
 }
 
-footer {
-  width: 100vw;
-  height: 0;
+.slide-container {
+  width: 0;
+  height: 100vh;
   display: flex;
-  justify-content: right;
+  flex-direction: column;
+  justify-content: center;
+  transition: .6s ease-in-out;
+  transform: translateX(100vw);
 }
 
-footer .add-btn {
+.slide-btn {
   position: fixed;
-  width: 70px;
-  bottom: -40px;
-  right: -40px;
-  height: 70px;
+  z-index: 1;
+  width: 50px;
+  height: 50px;
+  left: -25px;
   border: none;
-  border-radius: 40% 0 0 0;
+  border-radius: 20px;
   background-color: var(--theme);
   transition: .2s ease-out;
 }
 
-footer .add-btn:hover {
-  bottom: 0;
-  right: 0;
-  border-radius: 20px 0 0 0;
+.slide-btn:hover {
+  width: 100px;
+  left: -50px;
+}
+
+.btn-slide {
+  transform: translateX(0);
 }

@@ -98,7 +98,7 @@ router.delete("/:id", async (req, res) => {
       return res.status(404).send("Note not found");
     }
 
-    res.status(204).send(req.params.id);
+    res.status(204).send();
   } catch (err) {
     console.error("Error deleting note:", err);
     res.status(500).send("Internal Server Error");
