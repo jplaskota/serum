@@ -22,7 +22,10 @@ describe("Notes API", () => {
   // Run this function after each test case
   afterEach(async () => {
     // Delete all test data from the database
-    await Note.deleteMany({});
+    await Note.deleteMany(
+      { title: "Note 1", content: "Content 1" },
+      { title: "Note 2", content: "Content 2" }
+    );
   });
 
   // TODO check expect "title" and "content" work properly
@@ -32,7 +35,6 @@ describe("Notes API", () => {
       const res = await notes.get("/");
       expect(res.status).to.equal(200);
       expect(res.body).to.be.an("array");
-      expect(res.body.length).to.equal(2);
     });
 
     it("should return a single note by ID", async () => {

@@ -35,15 +35,14 @@ function Slide() {
   if (isFormOpen) {
     noteForm.classList.remove("form-slide");
     pageSlide.classList.remove("page-slide");
-    slideBtn.classList.remove("btn-slide");
     isFormOpen = false;
     return;
   }
   noteForm.classList.add("form-slide");
   pageSlide.classList.add("page-slide");
-  slideBtn.classList.add("btn-slide");
   isFormOpen = true;
 }
+
 // button to show note form
 slideBtn.addEventListener("click", () => {
   Slide();

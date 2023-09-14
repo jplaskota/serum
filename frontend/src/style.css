@@ -30,25 +30,23 @@ body {
   font-family: 'TripSansRegular';
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .bold {
   font-family: 'TripSansUltra';
 }
 
-.blur {
-  filter: blur(5px);
-}
-
 .page-container {
-  position: fixed;
   width: 100vw;
   display: flex;
   flex-direction: column;
   transition: .6s ease-in-out;
-  left: 0vw;
 }
 
 .page-slide {
-  left: -100vw;
+  transform: translateX(-100vw);
 }
 
 nav {
@@ -94,12 +92,14 @@ main {
   display: flex;
   justify-content: center;
   padding-top: 1rem;
+  overflow: scroll;
 }
 
-/* TODO .pinnedNoteContainer {...} */
 
 main .note-container {
   width: 80vw;
+  display: flex;
+  flex-direction: column;
 }
 
 main .note-box {
@@ -146,12 +146,12 @@ header .form-container {
   justify-content: center;
   align-items: center;
   transition: .6s ease-in-out;
-  left: 100vw;
+  transform: translateX(100vw);
   background-color: var(--bgc);
 }
 
 header .form-slide {
-  left: 0vw;
+  transform: translateX(0);
 }
 
 header .form-box {
@@ -193,22 +193,12 @@ header .new-content {
   border-radius: 5px;
 }
 
-.slide-container {
-  width: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transition: .6s ease-in-out;
-  transform: translateX(100vw);
-}
-
 .slide-btn {
   position: fixed;
   z-index: 1;
   width: 50px;
-  height: 50px;
   left: -25px;
+  height: 50px;
   border: none;
   border-radius: 20px;
   background-color: var(--theme);
@@ -220,6 +210,8 @@ header .new-content {
   left: -50px;
 }
 
-.btn-slide {
-  transform: translateX(0);
-}
+/* TODO need to clean up */
+/* TODO .pinnedNoteContainer or only pin */
+/* TODO slide btn hover effect bug */
+/* TODO title on fixed position */
+/* TODO where is menu btn ? X D */
