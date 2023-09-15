@@ -67,6 +67,8 @@ nav .title {
 .menu-container {
   width: 100vw;
   position: fixed;
+  top: 0;
+  right: 0;
   z-index: 99;
   display: flex;
   justify-content: right;
