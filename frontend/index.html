@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="./public/vite.svg">
+  <link rel="icon" href="./vite.svg">
   <meta name="theme-color" content="#f0ebe1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#14110f" media="(prefers-color-scheme: dark)">
   <link rel="stylesheet" href="./src/style.css">
@@ -12,7 +12,17 @@
 </head>
 
 <body>
-  <header>
+  <nav id="navbar">
+    <div class="title bold">
+      SERUM
+    </div>
+
+    <div class="menu-container">
+      <button class="menu-btn" data-menu></button>
+    </div>
+  </nav>
+
+  <article>
     <div class="form-container" data-noteForm>
       <div class="form-box">
         <input class="input new-title bold" contenteditable="true" aria-multiline="false" placeholder="Title..."
@@ -21,27 +31,21 @@
 
         <input class="input new-content" contenteditable="true" aria-multiline="true" placeholder="Content..."
           data-content></input>
+
+        <div class="form-btn" id="add-btn">
+          <img src="./src/assets/icons/add.svg" alt="add btn">
+        </div>
       </div>
-      <button class="slide-btn" data-slideBtn></button>
+      <button class="slide-btn" data-slideBtn>
+        <img src="./src/assets/icons/arrow.svg" alt="slide btn">
+      </button>
     </div>
-  </header>
-
-  <article class="page-container" data-pageSlide>
-    <nav>
-      <div class="title bold">
-        SERUM
-      </div>
-    </nav>
-
-    <main>
-      <div class="note-container" data-noteContainer>
-      </div>
-    </main>
   </article>
 
-  <div class="menu-container">
-    <button class="menu-btn" data-menu></button>
-  </div>
+  <main>
+    <div class="note-container" data-notesContainer>
+    </div>
+  </main>
 
   <script type="module" src="./src/main.js"></script>
 </body>

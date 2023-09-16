@@ -3,7 +3,7 @@
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: rgb(20, 17, 15);
+    background: #14110f;
     color: rgb(225, 210, 190);
   }
 
@@ -38,23 +38,17 @@ body::-webkit-scrollbar {
   font-family: 'TripSansUltra';
 }
 
-.page-container {
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  transition: .6s ease-in-out;
-}
-
-.page-slide {
-  transform: translateX(-100vw);
-}
-
 nav {
-  height: min-content;
-  position: relative;
+  position: fixed;
+  height: 40px;
+  width: 100vw;
+  z-index: 99;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  background-color: var(--bgc);
+  box-shadow: 0 5px 10px var(--bgc);
+  transition: .6s ease-in-out;
 }
 
 nav .title {
@@ -64,20 +58,14 @@ nav .title {
   -webkit-user-select: none;
 }
 
-.menu-container {
-  width: 100vw;
-  position: fixed;
-  top: 0;
+nav .menu-container {
+  position: absolute;
   right: 0;
-  z-index: 99;
-  display: flex;
-  justify-content: right;
 }
 
-.menu-btn {
+nav .menu-btn {
   width: 1rem;
   height: 1rem;
-  z-index: 1;
   margin: 10px;
   background-color: var(--theme);
   border: none;
@@ -85,16 +73,109 @@ nav .title {
   transition: .2s ease-in-out;
 }
 
-.menu-btn:hover {
+nav .menu-btn:hover {
   transform: scale(1.3);
+}
+
+article .form-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .6s ease-in-out;
+  transform: translateX(100vw);
+  background-color: var(--bgc);
+}
+
+article .form-slide {
+  transform: translateX(0);
+}
+
+article .form-box {
+  position: relative;
+  min-width: 200px;
+  width: fit-content;
+  height: fit-content;
+  background-color: var(--theme);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+article .input {
+  outline: none;
+  border: none;
+  background: none;
+  color: var(--bgc);
+}
+
+article .input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+article .new-title {
+  font-size: 2.5rem;
+  outline-width: 0;
+  border: none;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+article .new-content {
+  font-size: 2rem;
+  outline-width: 0;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+article .form-btn {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border: none;
+  border-radius: 50%;
+  top: 5px;
+  right: -40px;
+  background-color: var(--theme);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .2s ease-in-out;
+}
+
+article .form-btn:hover {
+  transform: scale(1.2);
+}
+
+article .slide-btn {
+  position: fixed;
+  width: 70px;
+  left: -35px;
+  height: 50px;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--theme);
+  transition: .2s ease-out;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+article .slide-btn:hover {
+  width: 100px;
+  left: -50px;
 }
 
 main {
   width: 100vw;
   display: flex;
   justify-content: center;
-  padding-top: 1rem;
-  overflow: scroll;
+  padding-top: 3rem;
 }
 
 
@@ -102,6 +183,14 @@ main .note-container {
   width: 80vw;
   display: flex;
   flex-direction: column;
+  transform: translateX(0vw);
+  transition: .6s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+main .notes-slide {
+  transform: translateX(-100vw);
 }
 
 main .note-box {
@@ -112,8 +201,6 @@ main .note-box {
 
 main .note-box:hover {
   transform: scale(1.05);
-  z-index: 1;
-  cursor: default;
 }
 
 main .note {
@@ -129,7 +216,6 @@ main .title {
   color: var(--bgc);
   cursor: default;
   user-select: none;
-  -webkit-user-select: none;
 }
 
 main .content {
@@ -137,83 +223,8 @@ main .content {
   color: var(--bgc);
   cursor: default;
   user-select: none;
-  -webkit-user-select: none;
-}
-
-header .form-container {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: .6s ease-in-out;
-  transform: translateX(100vw);
-  background-color: var(--bgc);
-}
-
-header .form-slide {
-  transform: translateX(0);
-}
-
-header .form-box {
-  min-width: 200px;
-  width: fit-content;
-  height: fit-content;
-  background-color: var(--theme);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 15px;
-  border-radius: 5px;
-}
-
-header .input {
-  outline: none;
-  border: none;
-  background: none;
-  color: var(--bgc);
-}
-
-header .input::placeholder {
-  color: rgba(0, 0, 0, 0.4);
-}
-
-header .new-title {
-  font-size: 2.5rem;
-  outline-width: 0;
-  border: none;
-  padding: 0 10px;
-  border-radius: 5px;
-}
-
-header .new-content {
-  font-size: 2rem;
-  outline-width: 0;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-.slide-btn {
-  position: fixed;
-  z-index: 1;
-  width: 50px;
-  left: -25px;
-  height: 50px;
-  border: none;
-  border-radius: 20px;
-  background-color: var(--theme);
-  transition: .2s ease-out;
-}
-
-.slide-btn:hover {
-  width: 100px;
-  left: -50px;
 }
 
 /* TODO need to clean up */
 /* TODO .pinnedNoteContainer or only pin */
 /* TODO slide btn hover effect bug */
-/* TODO title on fixed position */
-/* TODO where is menu btn ? X D */

@@ -1,4 +1,4 @@
-import { noteContainer } from "../main.js";
+import { notesContainer } from "../main.js";
 import {
   addNote,
   deleteNote,
@@ -11,7 +11,7 @@ export async function refreshNotes(macy) {
   const notes = await getNotes();
   if (!notes) throw new Error("No notes found");
 
-  noteContainer.innerHTML = "";
+  notesContainer.innerHTML = "";
   notes.forEach((note) => {
     generateNote(note);
   });
@@ -38,5 +38,5 @@ function generateNote(data) {
   content.textContent = data.content;
   note.appendChild(content);
 
-  noteContainer.appendChild(noteBox);
+  notesContainer.appendChild(noteBox);
 }
