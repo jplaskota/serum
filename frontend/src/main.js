@@ -1,16 +1,16 @@
 import Macy from "macy";
-import { addNote } from "./js/notes.crud.js";
-import { refreshNotes } from "./js/notes.logic.js";
+import { addNote } from "./scripts/notes.crud.js";
+import { refreshNotes } from "./scripts/notes.refresh.js";
 
 export const notesContainer = document.querySelector("[data-notesContainer]");
-const title = document.querySelector("[data-title]");
-const content = document.querySelector("[data-content]");
-const addBtn = document.getElementById("add-btn");
 
-const noteForm = document.querySelector("[data-noteForm]");
-const slideBtn = document.querySelector("[data-slideBtn]");
-const slideImg = slideBtn.querySelector("img");
-const navbar = document.getElementById("navbar");
+const title = document.querySelector("[data-title]"),
+  content = document.querySelector("[data-content]"),
+  addBtn = document.getElementById("add-btn"),
+  noteForm = document.querySelector("[data-noteForm]"),
+  slideBtn = document.querySelector("[data-slideBtn]"),
+  slideImg = slideBtn.querySelector("img"),
+  navbar = document.getElementById("navbar");
 
 // Layout to notes container using macy package
 const macyInstance = new Macy({
@@ -28,7 +28,7 @@ const macyInstance = new Macy({
 
 // Macy must recalculate when page is fully loaded
 window.onload = () => {
-  refreshNotes(macyInstance);
+  refreshNotes(macyInstance, notesContainer);
   console.log("loaded");
 };
 
@@ -54,16 +54,13 @@ function Slide() {
 }
 
 // Button to display note form
-slideBtn.addEventListener("click", () => {
+slideBtn.onclick = () => {
+  console.log("s");
   Slide();
-});
+};
 
-// navbar hide function
+// Navbar hide function
 onwheel = (e) => {
-  console.log("scroll: " + e.deltaY);
-  console.log("window: " + window.scrollY);
-  console.log(navbar.style.top);
-
   if (e.deltaY > 0 && !isFormOpen) {
     navbar.style.top = `-${navbar.clientHeight}px`;
   }
@@ -73,13 +70,10 @@ onwheel = (e) => {
   }
 };
 
-addBtn.addEventListener("click", async () => {
+// Btn to add new note
+addBtn.onclick = async () => {
   await addNote(title.value, content.value).catch((err) => {
-    console.error(err);
+    console.error("Add action Error: " + err);
     return;
   });
-
-  console.log("Note added");
-});
-
-// TODO New note has been added, but twice
+};
