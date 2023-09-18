@@ -1,5 +1,5 @@
 import { AddNote, DeleteNote, EditNote } from "./notes.crud";
-import { RefreshNotes } from "./notes.refresh";
+import RefreshNotes from "./notes.refresh";
 
 const notesContainer = document.querySelector("[data-notesContainer]"),
   title = document.querySelector("[data-title]"),
@@ -14,7 +14,7 @@ const notesContainer = document.querySelector("[data-notesContainer]"),
 
 let isFormOpen = false;
 
-export function NoteForm(data) {
+export default function NoteForm(data) {
   title.value = "";
   content.value = "";
   editBtn.style.display = "none";

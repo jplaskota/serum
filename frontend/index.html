@@ -7,6 +7,9 @@
   <link rel="icon" href="./vite.svg">
   <meta name="theme-color" content="#f0ebe1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#14110f" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./src/style.css">
   <title>serum</title>
 </head>
@@ -14,11 +17,22 @@
 <body>
   <nav id="navbar">
     <div class="title bold">
-      SERUM
+      <span>SERUM</span>
     </div>
 
-    <div class="menu-container">
-      <button class="menu-btn" data-menu></button>
+    <div class="right-nav">
+      <div class="search-box" id="search-box">
+        <input placeholder="Search something ..." class="search-input" id="search-input">
+
+        <div class="search-buttons" id="search-btn">
+          <i class="fa-solid fa-magnifying-glass" style="color: #e0d3be;"></i>
+          <img src="./src/assets/icons/close.svg" class="search-icon close-btn" alt="close">
+        </div>
+      </div>
+
+      <div class="menu-container">
+        <button class="menu-btn" data-menu></button>
+      </div>
     </div>
   </nav>
 

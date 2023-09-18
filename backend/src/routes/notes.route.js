@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
 });
 
 // GET route to fetch a single note by ID
-router.get("/:id", async (req, res) => {
+router.get("/id/:id", async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
 
@@ -34,6 +34,28 @@ router.get("/:id", async (req, res) => {
     res.status(200).send(note);
   } catch (err) {
     console.error("Error fetching note:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// GET route to fetch notes by text
+router.get("/text/:text", async (req, res) => {
+  try {
+    const notes = await Note.find({
+      $or: [
+        { _id: req.params.text },
+        { title: { $regex: req.params.text, $options: "i" } },
+        { content: { $regex: req.params.text, $options: "i" } },
+      ],
+    });
+
+    if (!notes) {
+      return res.status(404).send("Note not found");
+    }
+
+    res.status(200).send(notes);
+  } catch (err) {
+    console.error("Error fetching notes:", err);
     res.status(500).send("Internal Server Error");
   }
 });

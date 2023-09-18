@@ -15,9 +15,23 @@ export async function GetNotes() {
 }
 
 // Function to get a note by ID
-export async function GetNoteById(id) {
+export async function FindNoteById(id) {
   try {
-    const res = await fetch(url + id);
+    const res = await fetch(url + "id/" + id);
+
+    if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
+
+    return await res.json();
+  } catch (err) {
+    console.error("Fetch error:", err);
+    throw err;
+  }
+}
+
+// Function to get a note by text
+export async function FindNoteByText(text) {
+  try {
+    const res = await fetch(url + "text/" + text);
 
     if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
 

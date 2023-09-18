@@ -1,7 +1,11 @@
-import { NoteForm } from "./scripts/notes.form.js";
-import { RefreshNotes } from "./scripts/notes.refresh.js";
+import NoteForm from "./scripts/notes.form.js";
+import RefreshNotes from "./scripts/notes.refresh.js";
+import SearchNotes from "./scripts/notes.search.js";
 
-const slideBtn = document.querySelector("[data-slideBtn]");
+const slideBtn = document.querySelector("[data-slideBtn]"),
+  searchBox = document.getElementById("search-box"),
+  searchInput = document.getElementById("search-input"),
+  toggleSearch = document.getElementById("search-btn");
 
 // Macy must recalculate when page is fully loaded
 window.onload = () => {
@@ -14,7 +18,28 @@ let isFormOpen = false;
 // Button to display note form
 slideBtn.onclick = () => {
   isFormOpen = NoteForm();
-  console.log(isFormOpen);
+};
+
+// Button to display search bar
+toggleSearch.onclick = () => {
+  searchBox.classList.toggle("show-search-box");
+};
+
+let searchTimeout;
+
+searchInput.oninput = () => {
+  // Clear any existing timeout
+  clearTimeout(searchTimeout);
+
+  // Set a new timeout
+  searchTimeout = setTimeout(() => {
+    const searchText = searchInput.value;
+    if (searchText) {
+      SearchNotes(searchText);
+    } else {
+      RefreshNotes();
+    }
+  }, 300);
 };
 
 // Navbar hide function

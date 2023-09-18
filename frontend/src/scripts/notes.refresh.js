@@ -1,6 +1,6 @@
 import Macy from "macy";
 import { GetNotes } from "./notes.crud.js";
-import { NoteForm } from "./notes.form.js";
+import NoteForm from "./notes.form.js";
 
 const notesContainer = document.querySelector("[data-notesContainer]");
 
@@ -19,8 +19,15 @@ const macyInstance = new Macy({
 });
 
 // Downloading and displaying notes on the board
-export async function RefreshNotes() {
-  const notes = await GetNotes();
+export default async function RefreshNotes(data) {
+  let notes;
+
+  if (data !== undefined) {
+    notes = data;
+  } else {
+    notes = await GetNotes();
+  }
+
   if (!notes) throw new Error("No notes found");
 
   notesContainer.innerHTML = "";
