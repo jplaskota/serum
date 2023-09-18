@@ -8,8 +8,7 @@ const notesContainer = document.querySelector("[data-notesContainer]"),
   editBtn = document.getElementById("edit-btn"),
   noteForm = document.querySelector("[data-noteForm]"),
   slideBtn = document.querySelector("[data-slideBtn]"),
-  slideImg = slideBtn.querySelector("img"),
-  navbar = document.getElementById("navbar"),
+  slideIcon = slideBtn.querySelector("i"),
   deleteBtn = document.getElementById("delete-btn");
 
 let isFormOpen = false;
@@ -84,23 +83,12 @@ export default function NoteForm(data) {
 
   // Function to slide between notes-container and form
   function Slide() {
-    if (isFormOpen) {
-      noteForm.classList.remove("form-slide");
-      notesContainer.classList.remove("notes-slide");
-      slideBtn.style.justifyContent = "left";
-      slideImg.style.transform = "rotate(0deg)";
-      isFormOpen = false;
+    noteForm.classList.toggle("form-slide");
+    notesContainer.classList.toggle("notes-slide");
+    slideBtn.classList.toggle("icon-move");
+    slideIcon.classList.toggle("icon-rotate");
 
-      return isFormOpen;
-    }
-
-    noteForm.classList.add("form-slide");
-    notesContainer.classList.add("notes-slide");
-    slideBtn.style.justifyContent = "right";
-    slideImg.style.transform = "rotate(180deg)";
-    navbar.style.top = "0";
-    isFormOpen = true;
-
+    isFormOpen = !isFormOpen;
     return isFormOpen;
   }
 

@@ -22,16 +22,18 @@
 
     <div class="right-nav">
       <div class="search-box" id="search-box">
-        <input placeholder="Search something ..." class="search-input" id="search-input">
+        <input placeholder="cat, shop etc" class="search-input" id="search-input">
 
-        <div class="search-buttons" id="search-btn">
-          <i class="fa-solid fa-magnifying-glass" style="color: #e0d3be;"></i>
-          <img src="./src/assets/icons/close.svg" class="search-icon close-btn" alt="close">
+        <div class="search-btn" id="search-btn">
+          <i class="fa-solid fa-magnifying-glass light search-icon"></i>
+          <i class="fa-solid fa-xmark light close-icon"></i>
         </div>
       </div>
 
       <div class="menu-container">
-        <button class="menu-btn" data-menu></button>
+        <div class="menu-btn" data-menu>
+          <i class="fa-solid fa-bars light"></i>
+        </div>
       </div>
     </div>
   </nav>
@@ -48,25 +50,25 @@
         </input>
         <div class="form-btn-container">
           <div class="form-btn" id="add-btn">
-            <img src="./src/assets/icons/add.svg" alt="add btn">
+            <i class="fa-solid fa-plus dark"></i>
           </div>
-          <div class="form-btn" id="edit-btn">
-            <img src="./src/assets/icons/check.svg" alt="edit btn">
+          <div class=" form-btn" id="edit-btn">
+            <i class="fa-solid fa-check dark"></i>
           </div>
-          <div class="form-btn" id="delete-btn">
-            <img src="./src/assets/icons/delete.svg" alt="delete btn">
+          <div class=" form-btn" id="delete-btn">
+            <i class="fa-solid fa-minus dark"></i>
           </div>
         </div>
       </div>
 
-      <button class="slide-btn" data-slideBtn>
-        <img src="./src/assets/icons/arrow.svg" alt="slide btn">
-      </button>
+      <div class=" slide-btn" data-slideBtn>
+        <i class="fa-solid fa-chevron-left fa-xl dark"></i>
+      </div>
     </div>
   </article>
 
   <main>
-    <div class="note-container" data-notesContainer>
+    <div class=" note-container" data-notesContainer>
     </div>
   </main>
 

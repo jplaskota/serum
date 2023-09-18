@@ -5,6 +5,7 @@ import SearchNotes from "./scripts/notes.search.js";
 const slideBtn = document.querySelector("[data-slideBtn]"),
   searchBox = document.getElementById("search-box"),
   searchInput = document.getElementById("search-input"),
+  navbar = document.getElementById("navbar"),
   toggleSearch = document.getElementById("search-btn");
 
 // Macy must recalculate when page is fully loaded

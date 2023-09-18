@@ -8,8 +8,8 @@
   }
 
   :root {
-    --theme: rgb(225, 210, 190);
-    --bgc: rgb(20, 17, 15);
+    --light: rgb(225, 210, 190);
+    --dark: rgb(20, 17, 15);
   }
 }
 
@@ -20,8 +20,8 @@
   }
 
   :root {
-    --theme: rgb(60, 60, 60);
-    --bgc: rgb(240, 235, 225);
+    --light: rgb(60, 60, 60);
+    --dark: rgb(240, 235, 225);
   }
 }
 
@@ -38,17 +38,26 @@ body::-webkit-scrollbar {
   font-family: 'TripSansUltra';
 }
 
+.light {
+  color: var(--light)
+}
+
+.dark {
+  color: var(--dark)
+}
+
+/* Nav Section */
+
 nav {
   position: fixed;
-  height: 50px;
+  height: 40px;
   width: 100vw;
   z-index: 99;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: var(--bgc); */
-  background-color: darkblue;
-  box-shadow: 0 5px 10px var(--bgc);
+  background-color: var(--dark);
+  box-shadow: 0 5px 10px var(--dark);
   transition: .4s ease-in-out;
 }
 
@@ -72,9 +81,9 @@ nav .search-box {
   position: relative;
   width: 30px;
   height: 30px;
-  padding: 5px;
-  border-radius: 20px;
-  background-color: var(--theme);
+  padding: 1px;
+  border-radius: 15px;
+  background-color: var(--light);
   overflow: hidden;
   transition: .5s cubic-bezier(.9, 0, .3, .9);
 }
@@ -90,48 +99,77 @@ nav .search-input {
   outline: none;
   padding-left: 10px;
   background-color: transparent;
-  color: var(--bgc);
+  color: var(--dark);
   font-size: 1.2rem;
 }
 
-nav .search-buttons {
+nav .search-btn {
   height: 30px;
   width: 30px;
   border-radius: 50%;
-  background-color: var(--bgc);
+  background-color: var(--dark);
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 5px;
+  right: 1px;
   margin: auto;
   display: grid;
   place-items: center;
   cursor: pointer;
+  transition: .5s cubic-bezier(.9, 0, .3, .9);
 }
 
-nav .search-icon {
-  filter: invert(100%);
-  width: 70%;
+/* After click on search btn */
+
+nav .show-search-box .search-btn {
+  transform: rotate(90deg);
+}
+
+nav .search-icon,
+.close-icon {
   position: absolute;
+  transition: opacity .5s cubic-bezier(.9, 0, .3, .9);
 }
 
-nav .close-btn {
+nav .close-icon {
   opacity: 0;
 }
 
-nav .menu-btn {
-  width: 1rem;
-  height: 1rem;
-  margin: 10px;
-  background-color: var(--theme);
-  border: none;
-  border-radius: 50%;
-  transition: .2s ease-in-out;
+nav .show-search-box .search-icon {
+  opacity: 0;
 }
 
-nav .menu-btn:hover {
-  transform: scale(1.3);
+nav .show-search-box .close-icon {
+  opacity: 1;
 }
+
+/* Menu btn section */
+
+nav .menu-container {
+  width: 30px;
+  height: 30px;
+  padding: 1px;
+  background-color: var(--light);
+  border-radius: 50%;
+}
+
+nav .menu-btn {
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark);
+  transition: .2s ease-in-out;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+nav .menu-btn i {
+  position: absolute;
+}
+
+/* Article section */
 
 article .form-container {
   position: fixed;
@@ -142,9 +180,10 @@ article .form-container {
   align-items: center;
   transition: .4s ease-in-out;
   transform: translateX(100vw);
-  background-color: var(--bgc);
+  background-color: var(--dark);
 }
 
+/* Slide animation for Notes form */
 article .form-slide {
   transform: translateX(0);
 }
@@ -154,7 +193,7 @@ article .form-box {
   min-width: 200px;
   width: fit-content;
   height: fit-content;
-  background-color: var(--theme);
+  background-color: var(--light);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -166,7 +205,7 @@ article .input {
   outline: none;
   border: none;
   background: none;
-  color: var(--bgc);
+  color: var(--dark);
 }
 
 article .input::placeholder {
@@ -205,7 +244,7 @@ article .form-btn {
   width: 30px;
   border: none;
   border-radius: 50%;
-  background-color: var(--theme);
+  background-color: var(--light);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -216,6 +255,7 @@ article .form-btn:hover {
   transform: scale(1.2);
 }
 
+/* Btn to slide animation (Notes form) */
 article .slide-btn {
   position: fixed;
   width: 70px;
@@ -223,8 +263,8 @@ article .slide-btn {
   height: 50px;
   border: none;
   border-radius: 20px;
-  background-color: var(--theme);
-  transition: .2s ease-out;
+  background-color: var(--light);
+  transition: .2s cubic-bezier(.9, 0, .3, .9);
   display: flex;
   justify-content: left;
   align-items: center;
@@ -234,6 +274,21 @@ article .slide-btn:hover {
   width: 100px;
   left: -50px;
 }
+
+article .icon-move {
+  justify-content: right;
+}
+
+article .slide-btn i {
+  padding: 10px;
+  transition: .7s cubic-bezier(.9, 0, .3, .9);
+}
+
+article .icon-rotate {
+  transform: rotate(180deg);
+}
+
+/* Main section */
 
 main {
   width: 100vw;
@@ -260,7 +315,7 @@ main .notes-slide {
 
 main .note-box {
   border-radius: 5px;
-  background-color: var(--theme);
+  background-color: var(--light);
   transition: .2s ease-in-out;
 }
 
@@ -279,7 +334,7 @@ main .note {
 main .title {
   height: fit-content;
   font-size: 1.7rem;
-  color: var(--bgc);
+  color: var(--dark);
   cursor: default;
   user-select: none;
 }
@@ -287,7 +342,7 @@ main .title {
 main .content {
   height: fit-content;
   font-size: 1.4rem;
-  color: var(--bgc);
+  color: var(--dark);
   cursor: default;
   user-select: none;
 }
