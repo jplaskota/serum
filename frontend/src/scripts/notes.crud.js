@@ -1,7 +1,7 @@
 const url = "http://localhost:3000/";
 
 // Function to get all notes
-export async function getNotes() {
+export async function GetNotes() {
   try {
     const res = await fetch(url);
 
@@ -15,7 +15,7 @@ export async function getNotes() {
 }
 
 // Function to get a note by ID
-export async function getNoteById(id) {
+export async function GetNoteById(id) {
   try {
     const res = await fetch(url + id);
 
@@ -29,7 +29,7 @@ export async function getNoteById(id) {
 }
 
 // Function to add a new note
-export async function addNote(title, content) {
+export async function AddNote(title, content) {
   try {
     const res = await fetch(url, {
       method: "POST",
@@ -52,7 +52,7 @@ export async function addNote(title, content) {
 }
 
 // Function to edit an existing note
-export async function editNote(id, title, content) {
+export async function EditNote(id, title, content) {
   try {
     const res = await fetch(url + id, {
       method: "PUT",
@@ -75,12 +75,12 @@ export async function editNote(id, title, content) {
 }
 
 // Function to delete a note
-export async function deleteNote(id) {
+export async function DeleteNote(id) {
   try {
     const res = await fetch(url + id, { method: "DELETE" });
     if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
 
-    return res.status;
+    return id;
   } catch (err) {
     console.error("Fetch error:", err);
     throw err;
