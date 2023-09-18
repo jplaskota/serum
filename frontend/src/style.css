@@ -48,7 +48,7 @@ nav {
   align-items: flex-start;
   background-color: var(--bgc);
   box-shadow: 0 5px 10px var(--bgc);
-  transition: .6s ease-in-out;
+  transition: .4s ease-in-out;
 }
 
 nav .title {
@@ -84,7 +84,7 @@ article .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: .6s ease-in-out;
+  transition: .4s ease-in-out;
   transform: translateX(100vw);
   background-color: var(--bgc);
 }
@@ -193,7 +193,7 @@ main .note-container {
   display: flex;
   flex-direction: column;
   transform: translateX(0vw);
-  transition: .6s ease-in-out;
+  transition: .4s ease-in-out;
   user-select: none;
   -webkit-user-select: none;
 }
