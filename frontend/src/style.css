@@ -133,14 +133,22 @@ article .new-content {
   border-radius: 5px;
 }
 
-article .form-btn {
+article .form-btn-container {
   position: absolute;
+  width: fit-content;
+  height: fit-content;
+  top: 0;
+  right: -45px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+article .form-btn {
   height: 30px;
   width: 30px;
   border: none;
   border-radius: 50%;
-  top: 5px;
-  right: -40px;
   background-color: var(--theme);
   display: flex;
   justify-content: center;
@@ -181,6 +189,7 @@ main {
 
 main .note-container {
   width: 80vw;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   transform: translateX(0vw);
@@ -212,6 +221,7 @@ main .note {
 }
 
 main .title {
+  height: fit-content;
   font-size: 1.7rem;
   color: var(--bgc);
   cursor: default;
@@ -219,6 +229,7 @@ main .title {
 }
 
 main .content {
+  height: fit-content;
   font-size: 1.4rem;
   color: var(--bgc);
   cursor: default;
@@ -227,4 +238,4 @@ main .content {
 
 /* TODO need to clean up */
 /* TODO .pinnedNoteContainer or only pin */
-/* TODO slide btn hover effect bug */
+/* TODO hover effect bug */
