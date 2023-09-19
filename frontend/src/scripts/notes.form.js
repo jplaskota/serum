@@ -18,32 +18,38 @@ export default function NoteForm(data) {
   content.value = "";
   editBtn.style.display = "none";
   addBtn.style.display = "none";
+  deleteBtn.style.display = "none";
 
   if (data !== undefined) {
     title.value = data.title || "";
     content.value = data.content || "";
+    deleteBtn.style.display = "flex";
   }
 
   const oldTitle = title.value,
     oldContent = content.value;
 
-  let btn;
+  // Add new note = add btn | Edit note = edit btn
+  let btn = editBtn;
 
   if (title.value === "" && content.value === "") {
     btn = addBtn;
-  } else {
-    btn = editBtn;
   }
 
-  // When text is changed, icons (add or edit) are displayed
+  // When text is changed, icons (add or edit | delete) are displayed
   title.oninput = () => isChange();
   content.oninput = () => isChange();
 
   function isChange() {
     btn.style.display = "none";
+    deleteBtn.style.display = "none";
 
     if (oldTitle !== title.value || oldContent !== content.value) {
       btn.style.display = "flex";
+    }
+
+    if (title.value.length > 0 || content.value.length > 0) {
+      deleteBtn.style.display = "flex";
     }
   }
 
@@ -71,7 +77,11 @@ export default function NoteForm(data) {
 
   // Btn to delete note
   deleteBtn.onclick = async () => {
-    console.log(data._id);
+    if (data === undefined) {
+      Slide();
+      return;
+    }
+
     await DeleteNote(data._id).catch((err) => {
       console.log("Delete action error: " + err);
       return;
