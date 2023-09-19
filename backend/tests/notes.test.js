@@ -14,15 +14,22 @@ describe("Notes API", () => {
   beforeEach(async () => {
     // Insert test data into the database
     await Note.insertMany([
-      { title: "Note 1", content: "Content 1" },
-      { title: "Note 2", content: "Content 2" },
+      { title: "be_test_note_1", content: "content_to_note_1" },
+      { title: "be_test_note_2", content: "content_to_note_2" },
     ]);
   });
 
   // Run this function after each test case
   afterEach(async () => {
     // Delete all test data from the database
-    await Note.deleteMany({});
+    const filter = {
+      $or: [
+        { title: "be_test_note_1", content: "content_to_note_1" },
+        { title: "be_test_note_2", content: "content_to_note_2" },
+      ],
+    };
+
+    await Note.deleteMany(filter);
   });
 
   // TODO check expect "title" and "content" work properly
@@ -36,7 +43,14 @@ describe("Notes API", () => {
 
     it("should return a single note by ID", async () => {
       const existingNote = await Note.findOne();
-      const res = await notes.get(`/${existingNote._id}`);
+      const res = await notes.get(`/id/${existingNote._id}`);
+      expect(res.status).to.equal(200);
+      expect(res.body).to.have.property("title", existingNote.title);
+    });
+
+    it("should return a single note by text", async () => {
+      const existingNote = await Note.findOne();
+      const res = await notes.get(`/text/${existingNote.title}`);
       expect(res.status).to.equal(200);
       expect(res.body).to.have.property("title", existingNote.title);
     });
