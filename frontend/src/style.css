@@ -264,7 +264,7 @@ article .slide-btn {
   border: none;
   border-radius: 20px;
   background-color: var(--light);
-  transition: .2s cubic-bezier(.9, 0, .3, .9);
+  transition: .2s ease-in-out;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -294,7 +294,7 @@ main {
   width: 100vw;
   display: flex;
   justify-content: center;
-  padding-top: 3rem;
+  padding-top: 3.5rem;
 }
 
 

@@ -24,6 +24,15 @@ slideBtn.onclick = () => {
 // Button to display search bar
 toggleSearch.onclick = () => {
   searchBox.classList.toggle("show-search-box");
+  searchInput.focus();
+
+  if (!searchBox.classList.contains("show-search-box")) {
+    setTimeout(() => {
+      searchInput.blur();
+      searchInput.value = "";
+      RefreshNotes();
+    }, 300);
+  }
 };
 
 let searchTimeout;
