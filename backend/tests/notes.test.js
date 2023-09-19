@@ -52,7 +52,10 @@ describe("Notes API", () => {
       const existingNote = await Note.findOne();
       const res = await notes.get(`/text/${existingNote.title}`);
       expect(res.status).to.equal(200);
-      expect(res.body).to.have.property("title", existingNote.title);
+      const hasExpectedTitle = res.body.some(
+        (note) => note.title === existingNote.title
+      );
+      expect(hasExpectedTitle).to.be.true;
     });
 
     it("should return a 404 error for a non-existent note ID", async () => {
