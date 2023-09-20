@@ -37,6 +37,7 @@ toggleSearch.onclick = () => {
 
 let searchTimeout;
 
+// Search function
 searchInput.oninput = () => {
   // Clear any existing timeout
   clearTimeout(searchTimeout);

@@ -1,6 +1,11 @@
 @import url("./assets/fonts/TripSans-Regular/style.css");
 @import url("./assets/fonts/TripSans-Ultra/style.css");
 
+.text-input:empty:before {
+  content: attr(placeholder);
+  color: #999999;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #ededed;
@@ -64,6 +69,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--background);
   box-shadow: 0 5px 10px var(--background);
   transition: .4s ease-in-out;
 }
@@ -199,50 +205,44 @@ article .form-slide {
 
 article .form-box {
   position: relative;
-  height: fit-content;
-  min-width: 200px;
-  width: fit-content;
-  padding: 15px;
+  width: 500px;
+  height: auto;
+  padding: 20px;
   background-color: var(--secondary);
   display: flex;
+  justify-content: center;
   flex-direction: column;
   gap: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px var(--shadow);
 }
 
-article .input {
+article .form-scroll {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.form-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+article .text-input {
   outline: none;
   border: none;
-  background: none;
-  color: var(--text);
 }
 
-article .input::placeholder {
-  opacity: .5;
-}
-
-article .new-title {
+article .title {
   font-size: 2.5rem;
-  outline-width: 0;
-  border: none;
-  padding: 0 10px;
-  border-radius: 5px;
 }
 
-article .new-content {
+article .content {
   font-size: 2rem;
-  outline-width: 0;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
 }
 
 article .form-btn-container {
   position: absolute;
   width: fit-content;
   height: fit-content;
-  top: 0;
   right: -45px;
   display: flex;
   flex-direction: column;
@@ -325,7 +325,6 @@ main .note-box {
   border-radius: 5px;
   border: 1px solid var(--secondary);
   background-color: var(--secondary);
-  box-shadow: 0 0 10px var(--shadow);
   transition: .2s ease-in-out;
 }
 

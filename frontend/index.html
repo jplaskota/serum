@@ -1,80 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./vite.svg" />
+    <meta
+      name="theme-color"
+      content="#ededed"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#181818"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
+    <title>serum</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="./vite.svg">
-  <meta name="theme-color" content="#ededed" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#181818" media="(prefers-color-scheme: dark)">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./src/style.css">
-  <title>serum</title>
-</head>
-
-<body>
-  <nav id="navbar">
-    <div class="title bold">
-      <span>SERUM</span>
-    </div>
-
-    <div class="right-nav">
-      <div class="search-box" id="search-box">
-        <input placeholder="cat, shop etc" class="search-input" id="search-input">
-
-        <div class="search-btn btn" id="search-btn">
-          <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <i class="fa-solid fa-xmark close-icon"></i>
-        </div>
+  <body>
+    <nav id="navbar">
+      <div class="title bold">
+        <span>SERUM</span>
       </div>
 
-      <div class="menu-container">
-        <div class="menu-btn btn" data-menu>
-          <i class="fa-solid fa-bars"></i>
+      <div class="right-nav">
+        <div class="search-box" id="search-box">
+          <input
+            placeholder="cat, shop etc"
+            class="search-input"
+            id="search-input"
+          />
+
+          <div class="search-btn btn" id="search-btn">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <i class="fa-solid fa-xmark close-icon"></i>
+          </div>
         </div>
-      </div>
-    </div>
-  </nav>
 
-  <article>
-    <div class="form-container" data-noteForm>
-      <div class="form-box">
-        <input class="input new-title bold" contenteditable="true" aria-multiline="false" placeholder="Title..."
-          data-title>
-        </input>
-
-        <input class="input new-content" contenteditable="true" aria-multiline="true" placeholder="Content..."
-          data-content>
-        </input>
-        <div class="form-btn-container">
-          <div class="form-btn btn" id="add-btn">
-            <i class="fa-solid fa-plus"></i>
-          </div>
-          <div class="form-btn btn" id="edit-btn">
-            <i class="fa-solid fa-check"></i>
-          </div>
-          <div class="form-btn btn" id="delete-btn">
-            <i class="fa-solid fa-minus"></i>
+        <div class="menu-container">
+          <div class="menu-btn btn" data-menu>
+            <i class="fa-solid fa-bars"></i>
           </div>
         </div>
       </div>
+    </nav>
 
-      <div class=" slide-btn btn" data-slideBtn>
-        <i class="fa-solid fa-chevron-left fa-xl"></i>
+    <article>
+      <div class="form-container" data-noteForm>
+        <div class="form-box">
+          <div class="form-scroll">
+            <div
+              contenteditable="true"
+              aria-multiline="false"
+              spellcheck="true"
+              placeholder="Title"
+              class="text-input title bold"
+              id="new-title"
+            ></div>
+
+            <div
+              contenteditable="true"
+              aria-multiline="false"
+              spellcheck="true"
+              placeholder="content"
+              class="text-input content"
+              id="new-content"
+            ></div>
+          </div>
+
+          <div class="form-btn-container">
+            <div class="form-btn btn" id="add-btn">
+              <i class="fa-solid fa-plus"></i>
+            </div>
+
+            <div class="form-btn btn" id="edit-btn">
+              <i class="fa-solid fa-check"></i>
+            </div>
+
+            <div class="form-btn btn" id="delete-btn">
+              <i class="fa-solid fa-minus"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-btn btn" data-slideBtn>
+          <i class="fa-solid fa-chevron-left fa-xl"></i>
+        </div>
       </div>
-    </div>
-  </article>
+    </article>
 
-  <main>
-    <div class=" note-container" data-notesContainer>
-    </div>
-  </main>
+    <main>
+      <div class="note-container" data-notesContainer></div>
+    </main>
 
-  <script type="module" src="./src/main.js"></script>
-  <script type="module" src="./src/scripts/notes.form.js"></script>
-  <script type="module" src="./src/scripts/notes.refresh.js"></script>
-</body>
-
+    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/scripts/notes.form.js"></script>
+    <script type="module" src="./src/scripts/notes.refresh.js"></script>
+  </body>
 </html>

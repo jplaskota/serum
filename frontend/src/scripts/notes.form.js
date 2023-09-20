@@ -2,8 +2,8 @@ import { AddNote, DeleteNote, EditNote } from "./notes.crud";
 import RefreshNotes from "./notes.refresh";
 
 const notesContainer = document.querySelector("[data-notesContainer]"),
-  title = document.querySelector("[data-title]"),
-  content = document.querySelector("[data-content]"),
+  title = document.getElementById("new-title"),
+  content = document.getElementById("new-content"),
   addBtn = document.getElementById("add-btn"),
   editBtn = document.getElementById("edit-btn"),
   noteForm = document.querySelector("[data-noteForm]"),
@@ -14,25 +14,28 @@ const notesContainer = document.querySelector("[data-notesContainer]"),
 let isFormOpen = false;
 
 export default function NoteForm(data) {
-  title.value = "";
-  content.value = "";
+  title.textContent = "";
+  content.textContent = "";
   editBtn.style.display = "none";
   addBtn.style.display = "none";
   deleteBtn.style.display = "none";
 
+  title.focus();
+
   if (data !== undefined) {
-    title.value = data.title || "";
-    content.value = data.content || "";
+    title.textContent = data.title || "";
+    content.textContent = data.content || "";
     deleteBtn.style.display = "flex";
+    title.blur();
   }
 
-  const oldTitle = title.value,
-    oldContent = content.value;
+  const oldTitle = title.textContent,
+    oldContent = content.textContent;
 
   // Add new note = add btn | Edit note = edit btn
   let btn = editBtn;
 
-  if (title.value === "" && content.value === "") {
+  if (title.textContent === "" && content.textContent === "") {
     btn = addBtn;
   }
 
@@ -44,18 +47,39 @@ export default function NoteForm(data) {
     btn.style.display = "none";
     deleteBtn.style.display = "none";
 
-    if (oldTitle !== title.value || oldContent !== content.value) {
+    if (oldTitle !== title.textContent || oldContent !== content.textContent) {
       btn.style.display = "flex";
     }
 
-    if (title.value.length > 0 || content.value.length > 0) {
+    if (title.textContent.length > 0 || content.textContent.length > 0) {
       deleteBtn.style.display = "flex";
     }
   }
 
+  // Shortcut for add / edit and delete
+  onkeydown = (e) => {
+    if (
+      e.key === "Enter" &&
+      document.activeElement !== title &&
+      document.activeElement !== content &&
+      noteForm.classList.contains("form-slide")
+    ) {
+      btn.click();
+    }
+
+    if (
+      e.key === "Backspace" &&
+      document.activeElement !== title &&
+      document.activeElement !== content &&
+      noteForm.classList.contains("form-slide")
+    ) {
+      deleteBtn.click();
+    }
+  };
+
   // Btn to add new note
   addBtn.onclick = async () => {
-    await AddNote(title.value, content.value).catch((err) => {
+    await AddNote(title.textContent, content.textContent).catch((err) => {
       console.error("Add action Error: " + err);
       return;
     });
@@ -66,10 +90,12 @@ export default function NoteForm(data) {
 
   // Btn to edit note
   editBtn.onclick = async () => {
-    await EditNote(data._id, title.value, content.value).catch((err) => {
-      console.error("Edit action error: " + err);
-      return;
-    });
+    await EditNote(data._id, title.textContent, content.textContent).catch(
+      (err) => {
+        console.error("Edit action error: " + err);
+        return;
+      }
+    );
 
     RefreshNotes();
     Slide();
