@@ -8,6 +8,8 @@ const slideBtn = document.querySelector("[data-slideBtn]"),
   navbar = document.getElementById("navbar"),
   toggleSearch = document.getElementById("search-btn");
 
+const form = new NoteForm();
+
 // Macy must recalculate when page is fully loaded
 window.onload = () => {
   RefreshNotes();
@@ -18,7 +20,8 @@ let isFormOpen = false;
 
 // Button to display note form
 slideBtn.onclick = () => {
-  isFormOpen = NoteForm();
+  // isFormOpen = NoteForm();  old
+  isFormOpen = form.slide();
 };
 
 // Button to display search bar
@@ -63,3 +66,5 @@ onwheel = (e) => {
     navbar.style.top = "0";
   }
 };
+
+// TODO noteform to class with constructor and public function (Search hide noteform etc...)
