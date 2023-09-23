@@ -68,3 +68,4 @@ onwheel = (e) => {
 };
 
 // TODO noteform to class with constructor and public function (Search hide noteform etc...)
+// TODO pinned section

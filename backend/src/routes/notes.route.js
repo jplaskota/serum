@@ -60,8 +60,6 @@ router.get("/text/:text", async (req, res) => {
   }
 });
 
-// TODO create route to fetch by text inside title or content
-
 // POST route to create a new note
 router.post("/", async (req, res) => {
   try {
