@@ -1,10 +1,8 @@
 import Macy from "macy";
 import { GetNotes } from "./notes.crud.js";
-import NoteForm from "./notes.form.js";
+import NoteFormPanel from "./notes.form.js";
 
 const notesContainer = document.querySelector("[data-notesContainer]");
-
-const form = new NoteForm();
 
 // Layout to notes container using macy package
 const macyInstance = new Macy({
@@ -46,7 +44,7 @@ function GenerateNote(data) {
   noteBox.className = "note-box";
   noteBox.tabIndex = 0;
   noteBox.ondblclick = (e) => {
-    form.slideData(data);
+    NoteFormPanel.open(data);
   };
 
   const note = document.createElement("div");

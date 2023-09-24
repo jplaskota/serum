@@ -1,4 +1,4 @@
-import NoteForm from "./scripts/notes.form.js";
+import NoteFormPanel from "./scripts/notes.form.js";
 import RefreshNotes from "./scripts/notes.refresh.js";
 import SearchNotes from "./scripts/notes.search.js";
 
@@ -7,8 +7,6 @@ const slideBtn = document.querySelector("[data-slideBtn]"),
   searchInput = document.getElementById("search-input"),
   navbar = document.getElementById("navbar"),
   toggleSearch = document.getElementById("search-btn");
-
-const form = new NoteForm();
 
 // Macy must recalculate when page is fully loaded
 window.onload = () => {
@@ -20,8 +18,7 @@ let isFormOpen = false;
 
 // Button to display note form
 slideBtn.onclick = () => {
-  // isFormOpen = NoteForm();  old
-  isFormOpen = form.slide();
+  isFormOpen = NoteFormPanel.isOpen();
 };
 
 // Button to display search bar

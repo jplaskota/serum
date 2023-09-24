@@ -1,41 +1,72 @@
 import { AddNote, DeleteNote, EditNote } from "./notes.crud";
 import RefreshNotes from "./notes.refresh";
 
-export default class NoteForm {
+const title = document.getElementById("new-title"),
+  content = document.getElementById("new-content"),
+  addBtn = document.getElementById("add-btn"),
+  editBtn = document.getElementById("edit-btn"),
+  noteForm = document.querySelector("[data-noteForm]"),
+  notesContainer = document.querySelector("[data-notesContainer]"),
+  slideBtn = document.querySelector("[data-slideBtn]"),
+  slideIcon = slideBtn.querySelector("i"),
+  deleteBtn = document.getElementById("delete-btn");
+
+class NoteFormPanel {
   constructor() {
-    this.title = document.getElementById("new-title");
-    this.content = document.getElementById("new-content");
-    this.addBtn = document.getElementById("add-btn");
-    this.editBtn = document.getElementById("edit-btn");
-    this.noteForm = document.querySelector("[data-noteForm]");
-    this.notesContainer = document.querySelector("[data-notesContainer]");
-    this.slideBtn = document.querySelector("[data-slideBtn]");
-    this.slideIcon = this.slideBtn.querySelector("i");
-    this.deleteBtn = document.getElementById("delete-btn");
+    this.noteForm = noteForm;
+    this.notesContainer = notesContainer;
+    this.slideBtn = slideBtn;
+    this.slideIcon = slideIcon;
+    this.addBtn = addBtn;
+    // this.editBtn = editBtn;
+    this.deleteBtn = deleteBtn;
+    this.title = title;
+    this.content = content;
     this.isFormOpen = false;
-    this.data = null; // Store data here when the form is open
-
-    this.addBtn.addEventListener("click", () => {
-      this.add();
-    });
-
-    this.editBtn.addEventListener("click", () => {
-      this.edit();
-    });
-
-    this.deleteBtn.addEventListener("click", () => {
-      this.delete();
-    });
+    this.setupButtonsListeners();
+    this.setupKeysListeners();
   }
 
-  slideData(data) {
+  setupButtonsListeners() {
+    this.addBtn.onclick = () => {
+      console.log("addBtn clicked");
+      this.#add();
+    };
+
+    this.deleteBtn.onclick = () => {
+      console.log("deleteBtn clicked");
+      this.#delete();
+    };
+
+    this.slideBtn.onclick = () => {
+      console.log("slideBtn clicked");
+      this.slide();
+    };
+  }
+
+  setupKeysListeners() {
+    document.onkeydown = (e) => {
+      if (
+        e.key === "Backspace" &&
+        document.activeElement !== this.title &&
+        document.activeElement !== this.content
+      ) {
+        this.slide();
+      }
+    };
+  }
+
+  // TODO check slideWithData "if" statement
+
+  open(data) {
     this.data = data; // Store the data when opening the form
-    this.title.textContent = "";
-    this.content.textContent = "";
-    this.editBtn.style.display = "none";
-    this.addBtn.style.display = "none";
-    this.deleteBtn.style.display = "none";
+    // this.editBtn.style.display = "none";
     this.title.focus();
+
+    this.editBtn.onclick = () => {
+      console.log("editBtn clicked");
+      this.#edit();
+    };
 
     if (data !== undefined) {
       this.title.textContent = data.title || "";
@@ -55,13 +86,13 @@ export default class NoteForm {
     }
 
     // When text is changed, icons (add or edit | delete) are displayed
-    this.title.oninput = () => this.isChange();
-    this.content.oninput = () => this.isChange();
+    this.title.oninput = () => this.#isChange();
+    this.content.oninput = () => this.#isChange();
 
     this.slide();
   }
 
-  isChange() {
+  #isChange() {
     this.btn.style.display = "none";
     this.deleteBtn.style.display = "none";
 
@@ -81,7 +112,7 @@ export default class NoteForm {
   }
 
   // Btn to add new note
-  async add() {
+  async #add() {
     await AddNote(this.title.textContent, this.content.textContent).catch(
       (err) => {
         console.error("Add action Error: " + err);
@@ -90,11 +121,12 @@ export default class NoteForm {
     );
 
     RefreshNotes();
+    console.log("Note added");
     this.slide();
   }
 
   // Btn to edit note
-  async edit() {
+  async #edit() {
     if (!this.data) {
       console.error("Data not available for edit.");
       return;
@@ -114,7 +146,7 @@ export default class NoteForm {
   }
 
   // Btn to delete note
-  async delete() {
+  async #delete() {
     if (!this.data) {
       console.error("Data not available for delete.");
       return;
@@ -131,12 +163,22 @@ export default class NoteForm {
 
   // Function to slide between notes-container and form
   slide() {
+    if (this.isFormOpen) {
+      this.title.textContent = "";
+      this.content.textContent = "";
+    }
+
     this.noteForm.classList.toggle("form-slide");
     this.notesContainer.classList.toggle("notes-slide");
     this.slideBtn.classList.toggle("icon-move");
     this.slideIcon.classList.toggle("icon-rotate");
 
     this.isFormOpen = !this.isFormOpen;
+  }
+
+  isOpen() {
     return this.isFormOpen;
   }
 }
+
+export default new NoteFormPanel();
