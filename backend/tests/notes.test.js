@@ -32,8 +32,6 @@ describe("Notes API", () => {
     await Note.deleteMany(filter);
   });
 
-  // TODO check expect "title" and "content" work properly
-
   describe("GET /notes", () => {
     it("should return all notes", async () => {
       const res = await notes.get("/");

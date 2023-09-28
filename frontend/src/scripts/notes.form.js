@@ -18,7 +18,7 @@ class NoteFormPanel {
     this.slideBtn = slideBtn;
     this.slideIcon = slideIcon;
     this.addBtn = addBtn;
-    // this.editBtn = editBtn;
+    this.editBtn = editBtn;
     this.deleteBtn = deleteBtn;
     this.title = title;
     this.content = content;
@@ -33,6 +33,11 @@ class NoteFormPanel {
       this.#add();
     };
 
+    this.editBtn.onclick = () => {
+      console.log("editBtn clicked");
+      this.#edit();
+    };
+
     this.deleteBtn.onclick = () => {
       console.log("deleteBtn clicked");
       this.#delete();
@@ -40,7 +45,7 @@ class NoteFormPanel {
 
     this.slideBtn.onclick = () => {
       console.log("slideBtn clicked");
-      this.slide();
+      this.open();
     };
   }
 
@@ -49,24 +54,23 @@ class NoteFormPanel {
       if (
         e.key === "Backspace" &&
         document.activeElement !== this.title &&
-        document.activeElement !== this.content
+        document.activeElement !== this.content &&
+        this.data !== undefined
       ) {
         this.slide();
       }
     };
   }
 
-  // TODO check slideWithData "if" statement
-
   open(data) {
     this.data = data; // Store the data when opening the form
-    // this.editBtn.style.display = "none";
-    this.title.focus();
+    this.title.textContent = "";
+    this.content.textContent = "";
 
-    this.editBtn.onclick = () => {
-      console.log("editBtn clicked");
-      this.#edit();
-    };
+    this.addBtn.style.display = "none";
+    this.editBtn.style.display = "none";
+    this.deleteBtn.style.display = "none";
+    this.title.focus();
 
     if (data !== undefined) {
       this.title.textContent = data.title || "";
@@ -91,6 +95,8 @@ class NoteFormPanel {
 
     this.slide();
   }
+
+  // TODO openWithData(data) { }
 
   #isChange() {
     this.btn.style.display = "none";
@@ -163,11 +169,6 @@ class NoteFormPanel {
 
   // Function to slide between notes-container and form
   slide() {
-    if (this.isFormOpen) {
-      this.title.textContent = "";
-      this.content.textContent = "";
-    }
-
     this.noteForm.classList.toggle("form-slide");
     this.notesContainer.classList.toggle("notes-slide");
     this.slideBtn.classList.toggle("icon-move");

@@ -13,7 +13,7 @@
     --primary: #b7b8b8;
     --secondary: #2b2b2b;
     --accent: #6d6d6d;
-    --shadow: transparent;
+    --shadow: #101010;
   }
 
   body {
@@ -325,7 +325,8 @@ main .note-box {
   border-radius: 5px;
   border: 1px solid var(--secondary);
   background-color: var(--secondary);
-  transition: .2s ease-in-out;
+  box-shadow: 0 0 10px var(--shadow);
+  transition: .1s ease-out;
 }
 
 main .note-box:focus,

@@ -102,5 +102,5 @@ export async function DeleteNote(id) {
 }
 
 // TODO status text from backend
-// TODO alert function from main.js to display error / notification
+// TODO alert function to display error / notification
 // TODO auth token
