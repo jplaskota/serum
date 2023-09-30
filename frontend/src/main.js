@@ -18,6 +18,7 @@ let isFormOpen = false;
 
 // Button to display note form
 slideBtn.onclick = () => {
+  NoteFormPanel.open();
   isFormOpen = NoteFormPanel.isOpen();
 };
 
@@ -61,6 +62,14 @@ onwheel = (e) => {
 
   if (e.deltaY < -3 || window.scrollY <= 20) {
     navbar.style.top = "0";
+  }
+
+  if (window.scrollY === 0) {
+    navbar.style.backgroundColor = "transparent";
+    navbar.style.boxShadow = "none";
+  } else {
+    navbar.style.backgroundColor = "var(--background)";
+    navbar.style.boxShadow = "0 0 10px var(--background)";
   }
 };
 
