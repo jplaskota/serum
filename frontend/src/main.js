@@ -11,15 +11,17 @@ const slideBtn = document.querySelector("[data-slideBtn]"),
 // Macy must recalculate when page is fully loaded
 window.onload = () => {
   RefreshNotes();
+  window.scrollTo(0, 0);
 };
 
 // Slide (status) between notes-container and form
-let isFormOpen = false;
+function isFormOpen() {
+  return NoteFormPanel.isOpen();
+}
 
 // Button to display note form
 slideBtn.onclick = () => {
   NoteFormPanel.open();
-  isFormOpen = NoteFormPanel.isOpen();
 };
 
 // Button to display search bar
@@ -56,7 +58,7 @@ searchInput.oninput = () => {
 
 // Navbar hide function
 onwheel = (e) => {
-  if (e.deltaY > 0 && !isFormOpen) {
+  if (e.deltaY > 0 && !isFormOpen()) {
     navbar.style.top = `-${navbar.clientHeight}px`;
   }
 
@@ -64,13 +66,23 @@ onwheel = (e) => {
     navbar.style.top = "0";
   }
 
-  if (window.scrollY === 0) {
+  navbarColor();
+};
+
+// Navbar color function
+export function navbarColor() {
+  if (isFormOpen()) {
+    navbar.style.top = "0";
+  }
+
+  if (window.scrollY === 0 || isFormOpen()) {
     navbar.style.backgroundColor = "transparent";
     navbar.style.boxShadow = "none";
   } else {
     navbar.style.backgroundColor = "var(--background)";
     navbar.style.boxShadow = "0 0 10px var(--background)";
   }
-};
+}
 
 // TODO pinned section
+// TODO isFormOpen get set or something

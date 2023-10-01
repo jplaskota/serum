@@ -1,3 +1,4 @@
+import { navbarColor } from "../main";
 import { AddNote, DeleteNote, EditNote } from "./notes.crud";
 import RefreshNotes from "./notes.refresh";
 
@@ -42,13 +43,9 @@ class NoteFormPanel {
       console.log("deleteBtn clicked");
       this.#delete();
     };
-
-    this.slideBtn.onclick = () => {
-      console.log("slideBtn clicked");
-      this.open();
-    };
   }
 
+  // FIXME shortcut key
   setupKeysListeners() {
     document.onkeydown = (e) => {
       if (
@@ -66,6 +63,9 @@ class NoteFormPanel {
     this.data = data; // Store the data when opening the form
     this.title.textContent = "";
     this.content.textContent = "";
+
+    //FIXME before its working w/o this
+    this.setupButtonsListeners();
 
     this.addBtn.style.display = "none";
     this.editBtn.style.display = "none";
@@ -173,8 +173,8 @@ class NoteFormPanel {
     this.notesContainer.classList.toggle("notes-slide");
     this.slideBtn.classList.toggle("icon-move");
     this.slideIcon.classList.toggle("icon-rotate");
-
     this.isFormOpen = !this.isFormOpen;
+    navbarColor();
   }
 
   isOpen() {
