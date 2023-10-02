@@ -1,6 +1,6 @@
 import Macy from "macy";
-import { GetNotes } from "./notes.crud.js";
-import NoteFormPanel from "./notes.form.js";
+import { GetNotes } from "./notes.crud";
+import NoteFormPanel from "./notes.form";
 
 const notesContainer = document.querySelector("[data-notesContainer]");
 
@@ -44,7 +44,7 @@ function GenerateNote(data) {
   noteBox.className = "note-box";
   noteBox.tabIndex = 0;
   noteBox.ondblclick = (e) => {
-    NoteFormPanel.open(data);
+    NoteFormPanel.Open(data);
   };
 
   const note = document.createElement("div");

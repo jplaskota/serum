@@ -1,4 +1,4 @@
-const url = "http://localhost:3000/";
+const url = "/api";
 
 // Function to get all notes
 export async function GetNotes() {

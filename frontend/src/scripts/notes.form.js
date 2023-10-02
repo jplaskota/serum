@@ -1,6 +1,6 @@
-import { navbarColor } from "../main";
 import { AddNote, DeleteNote, EditNote } from "./notes.crud";
 import RefreshNotes from "./notes.refresh";
+import tools from "./tools";
 
 const title = document.getElementById("new-title"),
   content = document.getElementById("new-content"),
@@ -24,29 +24,29 @@ class NoteFormPanel {
     this.title = title;
     this.content = content;
     this.isFormOpen = false;
-    this.setupButtonsListeners();
-    this.setupKeysListeners();
+    this.SetupButtonsListeners();
+    this.SetupKeysListeners();
   }
 
-  setupButtonsListeners() {
+  SetupButtonsListeners() {
     this.addBtn.onclick = () => {
       console.log("addBtn clicked");
-      this.#add();
+      this.#Add();
     };
 
     this.editBtn.onclick = () => {
       console.log("editBtn clicked");
-      this.#edit();
+      this.#Edit();
     };
 
     this.deleteBtn.onclick = () => {
       console.log("deleteBtn clicked");
-      this.#delete();
+      this.#Delete();
     };
   }
 
   // FIXME shortcut key
-  setupKeysListeners() {
+  SetupKeysListeners() {
     document.onkeydown = (e) => {
       if (
         e.key === "Backspace" &&
@@ -54,18 +54,18 @@ class NoteFormPanel {
         document.activeElement !== this.content &&
         this.data !== undefined
       ) {
-        this.slide();
+        this.Slide();
       }
     };
   }
 
-  open(data) {
+  Open(data) {
     this.data = data; // Store the data when opening the form
     this.title.textContent = "";
     this.content.textContent = "";
 
     //FIXME before its working w/o this
-    this.setupButtonsListeners();
+    this.SetupButtonsListeners();
 
     this.addBtn.style.display = "none";
     this.editBtn.style.display = "none";
@@ -90,15 +90,15 @@ class NoteFormPanel {
     }
 
     // When text is changed, icons (add or edit | delete) are displayed
-    this.title.oninput = () => this.#isChange();
-    this.content.oninput = () => this.#isChange();
+    this.title.oninput = () => this.#IsChange();
+    this.content.oninput = () => this.#IsChange();
 
-    this.slide();
+    this.Slide();
   }
 
   // TODO openWithData(data) { }
 
-  #isChange() {
+  #IsChange() {
     this.btn.style.display = "none";
     this.deleteBtn.style.display = "none";
 
@@ -118,7 +118,7 @@ class NoteFormPanel {
   }
 
   // Btn to add new note
-  async #add() {
+  async #Add() {
     await AddNote(this.title.textContent, this.content.textContent).catch(
       (err) => {
         console.error("Add action Error: " + err);
@@ -128,11 +128,11 @@ class NoteFormPanel {
 
     RefreshNotes();
     console.log("Note added");
-    this.slide();
+    this.Slide();
   }
 
   // Btn to edit note
-  async #edit() {
+  async #Edit() {
     if (!this.data) {
       console.error("Data not available for edit.");
       return;
@@ -148,11 +148,11 @@ class NoteFormPanel {
     });
 
     RefreshNotes();
-    this.slide();
+    this.Slide();
   }
 
   // Btn to delete note
-  async #delete() {
+  async #Delete() {
     if (!this.data) {
       console.error("Data not available for delete.");
       return;
@@ -164,21 +164,18 @@ class NoteFormPanel {
     });
 
     RefreshNotes();
-    this.slide();
+    this.Slide();
   }
 
   // Function to slide between notes-container and form
-  slide() {
+  Slide() {
     this.noteForm.classList.toggle("form-slide");
     this.notesContainer.classList.toggle("notes-slide");
     this.slideBtn.classList.toggle("icon-move");
     this.slideIcon.classList.toggle("icon-rotate");
     this.isFormOpen = !this.isFormOpen;
-    navbarColor();
-  }
-
-  isOpen() {
-    return this.isFormOpen;
+    tools.isFormOpen = this.isFormOpen;
+    tools.NavbarColor();
   }
 }
 

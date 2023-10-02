@@ -1,6 +1,7 @@
-import NoteFormPanel from "./scripts/notes.form.js";
-import RefreshNotes from "./scripts/notes.refresh.js";
-import SearchNotes from "./scripts/notes.search.js";
+import NoteFormPanel from "./scripts/notes.form";
+import RefreshNotes from "./scripts/notes.refresh";
+import SearchNotes from "./scripts/notes.search";
+import tools from "./scripts/tools";
 
 const slideBtn = document.querySelector("[data-slideBtn]"),
   searchBox = document.getElementById("search-box"),
@@ -14,14 +15,9 @@ window.onload = () => {
   window.scrollTo(0, 0);
 };
 
-// Slide (status) between notes-container and form
-function isFormOpen() {
-  return NoteFormPanel.isOpen();
-}
-
-// Button to display note form
+//Button to display note form
 slideBtn.onclick = () => {
-  NoteFormPanel.open();
+  NoteFormPanel.Open();
 };
 
 // Button to display search bar
@@ -58,7 +54,7 @@ searchInput.oninput = () => {
 
 // Navbar hide function
 onwheel = (e) => {
-  if (e.deltaY > 0 && !isFormOpen()) {
+  if (e.deltaY > 0 && !tools.isFormOpen) {
     navbar.style.top = `-${navbar.clientHeight}px`;
   }
 
@@ -66,23 +62,8 @@ onwheel = (e) => {
     navbar.style.top = "0";
   }
 
-  navbarColor();
+  tools.NavbarColor();
 };
 
-// Navbar color function
-export function navbarColor() {
-  if (isFormOpen()) {
-    navbar.style.top = "0";
-  }
-
-  if (window.scrollY === 0 || isFormOpen()) {
-    navbar.style.backgroundColor = "transparent";
-    navbar.style.boxShadow = "none";
-  } else {
-    navbar.style.backgroundColor = "var(--background)";
-    navbar.style.boxShadow = "0 0 10px var(--background)";
-  }
-}
-
 // TODO pinned section
-// TODO isFormOpen get set or something
+// TODO custom scrollbar
