@@ -44,7 +44,7 @@ function GenerateNote(data) {
   noteBox.className = "note-box";
   noteBox.tabIndex = 0;
   noteBox.ondblclick = (e) => {
-    NoteFormPanel.Open(data);
+    NoteFormPanel.Toggle(data);
   };
 
   const note = document.createElement("div");

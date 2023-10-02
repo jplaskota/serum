@@ -31,5 +31,3 @@ class Tools {
 }
 
 export default new Tools();
-
-// ??? move search function to tools

@@ -1,7 +1,7 @@
 import NoteFormPanel from "./scripts/notes.form";
 import RefreshNotes from "./scripts/notes.refresh";
 import SearchNotes from "./scripts/notes.search";
-import tools from "./scripts/tools";
+import Tools from "./scripts/tools";
 
 const slideBtn = document.querySelector("[data-slideBtn]"),
   searchBox = document.getElementById("search-box"),
@@ -17,7 +17,7 @@ window.onload = () => {
 
 //Button to display note form
 slideBtn.onclick = () => {
-  NoteFormPanel.Open();
+  NoteFormPanel.Toggle();
 };
 
 // Button to display search bar
@@ -54,7 +54,7 @@ searchInput.oninput = () => {
 
 // Navbar hide function
 onwheel = (e) => {
-  if (e.deltaY > 0 && !tools.isFormOpen) {
+  if (e.deltaY > 0 && !Tools.isFormOpen) {
     navbar.style.top = `-${navbar.clientHeight}px`;
   }
 
@@ -62,7 +62,7 @@ onwheel = (e) => {
     navbar.style.top = "0";
   }
 
-  tools.NavbarColor();
+  Tools.NavbarColor();
 };
 
 // TODO pinned section
