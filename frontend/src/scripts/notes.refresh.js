@@ -4,7 +4,7 @@ import NoteFormPanel from "./notes.form";
 
 const notesContainer = document.querySelector("[data-notesContainer]");
 
-// Layout to notes container using macy package
+// Create a responsive grid layout using Macy
 const macyInstance = new Macy({
   container: notesContainer,
   trueOrder: false,
@@ -18,33 +18,35 @@ const macyInstance = new Macy({
   },
 });
 
-// Downloading and displaying notes on the board
+// Function to download and display notes on the board
 export default async function RefreshNotes(data) {
   let notes;
 
   if (data !== undefined) {
-    notes = data;
+    notes = data; // Use the provided data if available
   } else {
-    notes = await GetNotes();
+    notes = await GetNotes(); // Otherwise, fetch notes using GetNotes function
   }
 
   if (!notes) throw new Error("No notes found");
 
   notesContainer.innerHTML = "";
+
   notes.forEach((note) => {
     GenerateNote(note);
   });
 
+  // Reinitialize the Macy instance to adjust the layout
   macyInstance.reInit();
 }
 
-// Creating a note and adding it to the board
+// Function to create a note and add it to the board
 function GenerateNote(data) {
   const noteBox = document.createElement("div");
   noteBox.className = "note-box";
   noteBox.tabIndex = 0;
   noteBox.ondblclick = (e) => {
-    NoteFormPanel.Toggle(data);
+    NoteFormPanel.Toggle(data); // Toggle the note form panel when double-clicked
   };
 
   const note = document.createElement("div");

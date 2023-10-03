@@ -65,13 +65,52 @@ body {
   color: var(--text);
 }
 
+/* Notification icon */
+
+.notification {
+  position: fixed;
+  z-index: 2;
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
+  top: -50px;
+  right: 0;
+  left: 0;
+  padding: .3rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@keyframes notification {
+  0% {
+    top: -50px;
+  }
+
+  10% {
+    top: 5px;
+  }
+
+  90% {
+    top: 5px;
+  }
+
+  100% {
+    top: -50px;
+  }
+}
+
 /* Nav Section */
 
 nav {
   position: fixed;
   height: 50px;
   width: 100vw;
-  z-index: 99;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -264,6 +303,7 @@ article .form-btn {
   justify-content: center;
   align-items: center;
   transition: .2s ease-in-out;
+  cursor: pointer;
 }
 
 article .form-btn:hover {
@@ -282,6 +322,7 @@ article .slide-btn {
   display: flex;
   justify-content: left;
   align-items: center;
+  cursor: pointer;
 }
 
 article .slide-btn:hover {
@@ -362,6 +403,54 @@ main .content {
   user-select: none;
 }
 
+main .scrollbar-box {
+  position: fixed;
+  top: 50%;
+  left: 2vw;
+  height: 0;
+  width: 0;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .4s ease-in-out;
+}
+
+main #scrollbar {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--accent);
+  height: 10px;
+  border-radius: 5px;
+  rotate: 90deg;
+  cursor: pointer;
+  opacity: 1;
+}
+
+main #scrollbar::-webkit-slider-thumb {
+  appearance: none;
+  background: var(--text);
+  width: 30px;
+  height: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+main #scrollbar::-moz-range-thumb {
+  appearance: none;
+  background: var(--text);
+  width: 30px;
+  height: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+main .scrollbar-slide {
+  transform: translateX(-100vw);
+}
+
 /* TODO need to clean up */
 /* TODO .pinnedNoteContainer or only pin */
-/* TODO hover effect bug */
+/* FIXME hover effect bug */
+/* FIXME menu btn width */
+/* TODO scrollbar opacity when needed */

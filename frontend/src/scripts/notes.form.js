@@ -1,5 +1,6 @@
 import { AddNote, DeleteNote, EditNote } from "./notes.crud";
 import RefreshNotes from "./notes.refresh";
+import ShowNotification from "./notification";
 import Tools from "./tools";
 
 const title = document.getElementById("new-title"),
@@ -10,6 +11,7 @@ const title = document.getElementById("new-title"),
   notesContainer = document.querySelector("[data-notesContainer]"),
   slideBtn = document.querySelector("[data-slideBtn]"),
   slideIcon = slideBtn.querySelector("i"),
+  scrollbarBox = document.getElementById("scrollbar-box"),
   deleteBtn = document.getElementById("delete-btn");
 
 class NoteFormPanel {
@@ -21,6 +23,7 @@ class NoteFormPanel {
     this.notesContainer = notesContainer;
     this.slideBtn = slideBtn;
     this.slideIcon = slideIcon;
+    this.scrollbarBox = scrollbarBox;
     this.addBtn = addBtn;
     this.editBtn = editBtn;
     this.deleteBtn = deleteBtn;
@@ -132,12 +135,13 @@ class NoteFormPanel {
     await AddNote(this.title.textContent, this.content.textContent).catch(
       (err) => {
         console.error("Add action Error: " + err);
+        ShowNotification("Add action error", "error");
         return;
       }
     );
 
     RefreshNotes();
-    console.log("Note added");
+    ShowNotification("Note added", "success");
     this.#Close();
   }
 
@@ -145,6 +149,7 @@ class NoteFormPanel {
   async #Edit() {
     if (!this.#note) {
       console.error("Data not available for edit.");
+      ShowNotification("Note is empty", "error");
       return;
     }
 
@@ -154,11 +159,12 @@ class NoteFormPanel {
       this.content.textContent
     ).catch((err) => {
       console.error("Edit action error: " + err);
+      ShowNotification("Edit action error", "error");
       return;
     });
 
     RefreshNotes();
-    console.log("Note edited");
+    ShowNotification("Note edited", "success");
     this.#Close();
   }
 
@@ -166,16 +172,18 @@ class NoteFormPanel {
   async #Delete() {
     if (!this.#note) {
       console.error("Data not available for delete.");
+      ShowNotification("Note is empty", "error");
       return;
     }
 
     await DeleteNote(this.#note._id).catch((err) => {
-      console.log("Delete action error: " + err);
+      console.error("Delete action error: " + err);
+      ShowNotification("Delete action error", "error");
       return;
     });
 
     RefreshNotes();
-    console.log("Note deleted");
+    ShowNotification("Note deleted", "success");
     this.#Close();
   }
 
@@ -202,6 +210,7 @@ class NoteFormPanel {
     this.notesContainer.classList.toggle("notes-slide");
     this.slideBtn.classList.toggle("icon-move");
     this.slideIcon.classList.toggle("icon-rotate");
+    this.scrollbarBox.classList.toggle("scrollbar-slide");
     Tools.isFormOpen = !Tools.isFormOpen;
     Tools.NavbarColor();
   }

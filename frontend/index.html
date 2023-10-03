@@ -27,6 +27,10 @@
   </head>
 
   <body>
+    <div class="notification" id="notification">
+      <span>Error 404</span>
+    </div>
+
     <nav id="navbar">
       <div class="title bold">
         <span>SERUM</span>
@@ -100,6 +104,9 @@
 
     <main>
       <div class="note-container" data-notesContainer></div>
+      <div class="scrollbar-box" id="scrollbar-box">
+        <input type="range" id="scrollbar" min="0" max="100" step="1" />
+      </div>
     </main>
 
     <script type="module" src="./src/main.js"></script>
