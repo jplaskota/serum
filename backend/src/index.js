@@ -1,10 +1,9 @@
+import colors from "colors";
 import cors from "cors";
-import dotenv from "dotenv";
 import express from "express";
-import notes from "./src/routes/notes.route.js";
-import connectToDatabase from "./src/services/db.service.js";
+import notes from "./routes/notes.route.js";
+import connectToDatabase from "./services/db.service.js";
 
-dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -12,14 +11,16 @@ app.use(express.urlencoded({ extended: false }));
 // Enable CORS for all routes
 app.use(cors());
 
-const port = process.env.SERVER_PORT || 3000;
+const port = Bun.env.SERVER_PORT || 3000;
 
 connectToDatabase()
   .then(() => {
     app.use("/", notes);
 
     app.listen(port, () => {
-      console.log(`Backend server running on port ${port}`);
+      console.clear();
+      console.log(colors.green("\nServer started\n"));
+      console.log("➜".green + ` Port: ${port}`);
     });
   })
   .catch((err) => {

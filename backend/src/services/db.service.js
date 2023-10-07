@@ -1,9 +1,6 @@
-import dotenv from "dotenv";
 import mongoose from "mongoose";
 
-dotenv.config();
-
-const MONGODB_URI = process.env.DB_CONN_STRING;
+const MONGODB_URI = Bun.env.DB_CONN_STRING;
 
 export default async function connectToDatabase() {
   try {
