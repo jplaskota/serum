@@ -1,8 +1,14 @@
 {
   "name": "serum",
-  "private": true,
   "version": "0.0.0",
+  "description": "",
+  "main": "index.html",
   "type": "module",
+  "author": "jplaskota",
+  "license": "GPL-3.0",
+  "keywords": [
+    "frontend"
+  ],
   "scripts": {
     "dev": "bunx --bun vite",
     "build": "vite build",

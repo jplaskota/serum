@@ -1,4 +1,4 @@
-const url = "/api";
+const url = "/api/notes/";
 
 // Function to get all notes
 export async function GetNotes() {
