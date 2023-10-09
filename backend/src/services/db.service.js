@@ -1,10 +1,11 @@
+import colors from "colors";
 import mongoose from "mongoose";
 
 const MONGODB_URI = Bun.env.DB_CONN_STRING;
 
 export default async function connectToDatabase() {
   try {
-    await mongoose.connect(MONGODB_URI, {
+    mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -12,20 +13,21 @@ export default async function connectToDatabase() {
     const db = mongoose.connection;
 
     db.on("connected", () => {
-      console.log("Connected to MongoDB");
+      console.log("✔︎ ".green + "Connected to MongoDB");
     });
+
     db.on("error", (err) => {
-      console.error("MongoDB connection error:", err);
       throw err;
     });
+
     db.on("disconnected", () => {
-      console.log("MongoDB disconnected");
+      console.log("✖︎ ".red + "MongoDB disconnected");
     });
+
     db.once("open", () => {
-      console.log("MongoDB connected");
+      console.log("✔︎ ".green + "MongoDB connection opened");
     });
   } catch (err) {
-    console.error("MongoDB connection failed: ", err);
-    throw err;
+    throw new Error("MongoDB connection failed: ", err);
   }
 }
