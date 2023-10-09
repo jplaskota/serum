@@ -1,18 +1,19 @@
 {
-  "name": "backend",
+  "name": "serum_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
-  "scripts": {
-    "server": "bun --watch run src/index.js",
-    "test": "mocha tests/notes.test.js --timeout 10000 --exit"
-  },
-  "keywords": [
-    "backend"
-  ],
   "author": "jplaskota",
   "license": "GPL-3.0",
+  "keywords": [
+    "backend",
+    "serum_backend"
+  ],
+  "scripts": {
+    "server": "bun --watch run server.js",
+    "test": "mocha tests/notes.test.js --timeout 10000 --exit"
+  },
   "dependencies": {
     "chai": "^4.3.8",
     "chai-http": "^4.4.0",

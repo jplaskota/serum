@@ -2,10 +2,6 @@ import express from "express";
 import Note from "../models/notes.model.js";
 
 const router = express.Router();
-export default router;
-
-router.use(express.json());
-router.use(express.urlencoded({ extended: false }));
 
 // GET route to fetch all notes
 router.get("/", async (req, res) => {
@@ -125,4 +121,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// TODO add text to display on frontend
+export default router;
