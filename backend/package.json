@@ -11,7 +11,7 @@
     "serum_backend"
   ],
   "scripts": {
-    "server": "bun --watch run server.js",
+    "server": "nodemon server.js",
     "test": "mocha tests/notes.test.js --timeout 10000 --exit"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "chai-http": "^4.4.0",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mocha": "^10.2.0",
     "mongoose": "^7.5.0",

@@ -1,5 +1,8 @@
 import colors from "colors";
+import dotenv from "dotenv";
 import mongoose from "mongoose";
+
+dotenv.config();
 
 // process because test (mocha / chai)
 const MONGODB_URI = process.env.DB_CONN_STRING;
