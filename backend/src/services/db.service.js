@@ -1,7 +1,8 @@
 import colors from "colors";
 import mongoose from "mongoose";
 
-const MONGODB_URI = Bun.env.DB_CONN_STRING;
+// process because test (mocha / chai)
+const MONGODB_URI = process.env.DB_CONN_STRING;
 
 export default async function connectToDatabase() {
   try {

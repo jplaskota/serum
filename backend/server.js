@@ -5,6 +5,6 @@ const port = Bun.env.PORT || 3000;
 
 app.listen(port, () => {
   console.clear();
-  console.log(colors.green("\nSERUM Backend started\n"));
+  console.log("\nSERUM Backend started\n".green);
   console.log("➜".green + ` Port: ${port}`);
 });

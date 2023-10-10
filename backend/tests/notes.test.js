@@ -1,6 +1,6 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
-import app from "../index.js";
+import app from "../src/index.js";
 import Note from "../src/models/notes.model.js";
 
 chai.use(chaiHttp);
@@ -34,21 +34,21 @@ describe("Notes API", () => {
 
   describe("GET /notes", () => {
     it("should return all notes", async () => {
-      const res = await notes.get("/");
+      const res = await notes.get("/notes");
       expect(res.status).to.equal(200);
       expect(res.body).to.be.an("array");
     });
 
     it("should return a single note by ID", async () => {
       const existingNote = await Note.findOne();
-      const res = await notes.get(`/id/${existingNote._id}`);
+      const res = await notes.get(`/notes/id/${existingNote._id}`);
       expect(res.status).to.equal(200);
       expect(res.body).to.have.property("title", existingNote.title);
     });
 
     it("should return a single note by text", async () => {
       const existingNote = await Note.findOne();
-      const res = await notes.get(`/text/${existingNote.title}`);
+      const res = await notes.get(`/notes/text/${existingNote.title}`);
       expect(res.status).to.equal(200);
       const hasExpectedTitle = res.body.some(
         (note) => note.title === existingNote.title
@@ -58,7 +58,7 @@ describe("Notes API", () => {
 
     it("should return a 404 error for a non-existent note ID", async () => {
       const nonExistentId = "nonExistentId";
-      const res = await notes.get(`/${nonExistentId}`);
+      const res = await notes.get(`/notes/id/${nonExistentId}`);
       expect(res.status).to.equal(404);
     });
   });
@@ -66,7 +66,7 @@ describe("Notes API", () => {
   describe("POST /", () => {
     it("should create a new note", async () => {
       const newNoteData = { title: "New Note", content: "New Content" };
-      const res = await notes.post("/").send(newNoteData);
+      const res = await notes.post("/notes").send(newNoteData);
       expect(res.status).to.equal(201);
       expect(res.body).to.have.property("title", newNoteData.title);
       expect(res.body).to.have.property("content", newNoteData.content);
@@ -74,7 +74,7 @@ describe("Notes API", () => {
 
     it("should return a 400 error for invalid data", async () => {
       const invalidNoteData = { title: "", content: "" };
-      const res = await notes.post("/").send(invalidNoteData);
+      const res = await notes.post("/notes").send(invalidNoteData);
       expect(res.status).to.equal(400);
     });
   });
@@ -86,7 +86,9 @@ describe("Notes API", () => {
         title: "Updated Title",
         content: "Updated Content",
       };
-      const res = await notes.put(`/${existingNote._id}`).send(updatedNoteData);
+      const res = await notes
+        .put(`/notes/${existingNote._id}`)
+        .send(updatedNoteData);
       expect(res.status).to.equal(200);
       expect(res.body).to.have.property("title", updatedNoteData.title);
       expect(res.body).to.have.property("content", updatedNoteData.content);
@@ -98,14 +100,18 @@ describe("Notes API", () => {
         title: "Updated Title",
         content: "Updated Content",
       };
-      const res = await notes.put(`/${nonExistentId}`).send(updatedNoteData);
+      const res = await notes
+        .put(`/notes/${nonExistentId}`)
+        .send(updatedNoteData);
       expect(res.status).to.equal(404);
     });
 
     it("should return a 400 error for invalid data", async () => {
       const existingNote = await Note.findOne();
       const invalidNoteData = { title: "", content: "" };
-      const res = await notes.put(`/${existingNote._id}`).send(invalidNoteData);
+      const res = await notes
+        .put(`/notes/${existingNote._id}`)
+        .send(invalidNoteData);
       expect(res.status).to.equal(400);
     });
   });
@@ -113,7 +119,7 @@ describe("Notes API", () => {
   describe("DELETE /notes/:id", () => {
     it("should delete a note by ID", async () => {
       const existingNote = await Note.findOne();
-      const res = await notes.delete(`/${existingNote._id}`);
+      const res = await notes.delete(`/notes/${existingNote._id}`);
       expect(res.status).to.equal(204);
       const deletedNote = await Note.findById(existingNote._id);
       expect(deletedNote).to.be.null;
@@ -121,7 +127,7 @@ describe("Notes API", () => {
 
     it("should return a 404 error for a non-existent note ID", async () => {
       const nonExistentId = "nonExistentId";
-      const res = await notes.delete(`/${nonExistentId}`);
+      const res = await notes.delete(`/notes${nonExistentId}`);
       expect(res.status).to.equal(404);
     });
   });

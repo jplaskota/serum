@@ -15,23 +15,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18.x"
+      - name: Set up Bun.js
+        uses: oven-sh/setup-bun@v1
 
       - name: Install dependencies
-        run: npm install
+        run: bun install
         working-directory: backend
 
       - name: Set up .env file
         run: |
           echo "DB_CONN_STRING=${{ secrets.DB_CONN_STRING }}" > backend/.env
-          echo "SERVER_PORT=${{ secrets.SERVER_PORT }}" >> backend/.env
         env:
           DB_CONN_STRING: ${{ secrets.DB_CONN_STRING }}
-          SERVER_PORT: ${{ secrets.SERVER_PORT }}
 
       - name: Run unit tests
-        run: npm test
+        run: bun test
         working-directory: backend
