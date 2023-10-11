@@ -1,7 +1,10 @@
 import colors from "colors";
-import app from "./src";
+import dotenv from "dotenv";
+import app from "./src/index.js";
 
-const port = Bun.env.PORT || 3000;
+dotenv.config();
+
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
   console.clear();
